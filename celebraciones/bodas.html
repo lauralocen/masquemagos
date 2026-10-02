@@ -267,9 +267,9 @@ footer{background:#1A1005;padding:36px 20px;padding-bottom:max(36px,calc(20px + 
 
 /* DESKTOP */
 @media(min-width:640px){
-  .hero{display:grid;grid-template-columns:1.12fr .88fr;min-height:84vh;align-items:center;padding-top:0}
-  .hero-img-wrap{height:100%;max-height:none;order:2}
-  .hero-text{padding:120px 48px 80px;order:1}
+  .hero{display:grid;grid-template-columns:1.12fr .88fr;min-height:84vh;align-items:stretch;padding-top:0}
+  .hero-img-wrap{height:auto;min-height:84vh;max-height:none;order:2;align-self:stretch}
+  .hero-text{padding:120px 48px 80px;order:1;display:flex;flex-direction:column;justify-content:center}
   .hero-img-gradient{background:linear-gradient(90deg,var(--warm) 0%,transparent 30%),linear-gradient(180deg,transparent 65%,var(--warm) 100%)}
   .trust{margin:0 48px}
   .trust-num{font-size:28px}
