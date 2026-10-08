@@ -504,74 +504,14 @@ function viewDashboard(){
     </div>`;
   }
 
-  // ---- Lista de foco: "esto es lo único que tienes que hacer ahora" ----
-  const focusItems = [];
-  STATE.gigs.filter(g=>g.event_date===todayStr).forEach(g=>{
-    focusItems.push({rank:-1, icon:'🎉', title:g.clients?.name||'—', subtitle:(g.performer_role==='animador'?'🎭 ':'🪄 ')+(g.magician||'Sin mago')+' · '+(g.place||''), tag:'BOLO HOY'+(g.event_time?' · '+g.event_time:''), tagColor:'#166534', onClick:`openGigDetail('${g.id}')`, phone:g.clients?.phone});
-  });
-  STATE.calls.filter(c=>c.due_date < todayStr).forEach(c=>{
-    focusItems.push({rank:0, icon:'🔴', title:c.clients?.name||'—', subtitle:c.reason, tag:'Llamada vencida', tagColor:'#991B1B', onClick:`openClientDetail('${c.client_id}')`, phone:c.clients?.phone});
-  });
-  STATE.calls.filter(c=>c.due_date === todayStr).forEach(c=>{
-    focusItems.push({rank:1, icon:'📞', title:c.clients?.name||'—', subtitle:c.reason, tag:'Hoy', tagColor:'#166534', onClick:`openClientDetail('${c.client_id}')`, phone:c.clients?.phone});
-  });
-  sinMago.slice(0,3).forEach(g=>{
-    focusItems.push({rank:2, icon:'⚠️', title:g.clients?.name||'—', subtitle:'Bolo sin mago · '+(g.place||''), tag:fmtDate(g.event_date), tagColor:'#991B1B', onClick:`openGigDetail('${g.id}')`, phone:g.clients?.phone});
-  });
-  pendingSoon.slice(0,3).forEach(g=>{
-    focusItems.push({rank:3, icon:'🟠', title:g.clients?.name||'—', subtitle:'Sin confirmar · '+(g.place||''), tag:fmtDate(g.event_date), tagColor:'#C2410C', onClick:`openGigDetail('${g.id}')`, phone:g.clients?.phone});
-  });
-  coldLeads.slice(0,3).forEach(c=>{
-    const days = Math.floor((today - new Date(c.status_updated_at)) / (1000*60*60*24));
-    focusItems.push({rank:4, icon:'🥶', title:c.name, subtitle:STATUS_STYLES[c.status]?.label||c.status, tag:days+' días parado', tagColor:'#92400E', onClick:`openClientDetail('${c.id}')`, phone:c.phone});
-  });
-  const focusTop = focusItems.sort((a,b)=>a.rank-b.rank).slice(0,6);
-
   return `
     <h1 style="font-size:26px;margin-bottom:4px">Buenos días 👋</h1>
     <p style="color:var(--muted);margin-bottom:20px;font-size:14px">Esto es lo que tenéis hoy sobre la mesa.</p>
-
-    <div class="card" style="margin-bottom:20px;border-color:var(--gold-btn);border-width:2px">
-      <h3 style="font-size:16px;margin-bottom:4px">🎯 Solo esto por ahora</h3>
-      <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Lo más urgente, en orden. No hace falta mirar nada más ahora mismo.</p>
-      ${focusTop.length===0?'<p style="font-size:13.5px;color:var(--muted)">Nada urgente ahora mismo 🎉 Todo bajo control.</p>':''}
-      <div style="display:grid;gap:8px">
-        ${focusTop.map(item=>`<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F1EBDD;cursor:pointer" onclick="${item.onClick}">
-          <span style="font-size:16px;flex-shrink:0">${item.icon}</span>
-          <div style="flex:1;min-width:0">
-            <div style="font-size:14px;font-weight:600">${item.title}</div>
-            <div style="font-size:12px;color:var(--muted)">${item.subtitle}</div>
-          </div>
-          <span style="font-size:11px;font-weight:700;color:${item.tagColor};white-space:nowrap">${item.tag}</span>
-          ${quickActions(item.phone)}
-        </div>`).join('')}
-      </div>
-    </div>
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px">
       <div class="stat-card"><div class="stat-icon" style="background:#FDF2E9">🎯</div><div><div style="font-size:26px;font-weight:700;color:var(--gold-btn)">${activos}</div><div style="font-size:12.5px;color:var(--muted)">Leads activos</div></div></div>
       <div class="stat-card"><div class="stat-icon" style="background:#DCFCE7">🎩</div><div><div style="font-size:26px;font-weight:700;color:#166534">${confirmados}</div><div style="font-size:12.5px;color:var(--muted)">Bolos confirmados</div></div></div>
       <div class="stat-card"><div class="stat-icon" style="background:#DBEAFE">📞</div><div><div style="font-size:26px;font-weight:700;color:#1D4ED8">${pendientes}</div><div style="font-size:12.5px;color:var(--muted)">Llamadas pendientes</div></div></div>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-      <h3 style="font-size:16px">💰 Clientes presupuestados</h3>
-    </div>
-    <div style="display:grid;gap:10px;margin-bottom:20px">
-      ${presupuestadosInfo.length===0?'<p style="font-size:13.5px;color:var(--muted)">Ningún cliente en estado "Presupuestado" ahora mismo.</p>':''}
-      ${presupuestadosInfo.map(c=>{
-        const t = TYPE_STYLES[c.type] || TYPE_STYLES.particular;
-        const infoLine = [t.label, c.event_type, c.event_date?fmtDate(c.event_date):null, c.locality, c.province, c.phone].filter(Boolean).join(' · ');
-        return `<div class="card" style="cursor:pointer" onclick="openClientDetail('${c.id}')">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:${c.quotes.length>0?'8px':'0'}">
-          <div style="font-size:13px;min-width:0"><strong style="font-size:14.5px">${c.name}</strong> <span style="color:var(--muted)">${infoLine?'· '+infoLine:''}</span></div>
-          ${quickActions(c.phone)}
-        </div>
-        ${c.quotes.map(g=>`<div style="font-size:12.5px;color:var(--muted);padding:4px 0;border-top:1px solid #F1EBDD">
-          ${g.place||'Lugar sin especificar'} ${g.event_date?'· '+fmtDate(g.event_date):''} · ${g.performer_role==='animador'?'🎭 Animador':'🪄 Mago'}: ${g.magician||'—'} ${g.price?'· '+Number(g.price).toFixed(2)+'€':''} · ${magoStatusLabel(g.magician_status)}
-        </div>`).join('')}
-      </div>`;
-      }).join('')}
     </div>
 
     ${sinMago.length>0?`
@@ -596,26 +536,12 @@ function viewDashboard(){
       </div>
     </div>` : ''}
 
-    ${coldLeads.length>0?`
-    <div class="card" style="margin-bottom:20px;border-color:#FCD34D;background:#FFFBEB">
-      <h3 style="font-size:16px;margin-bottom:12px">🥶 Leads fríos (5+ días sin moverse)</h3>
-      <div style="display:grid;gap:8px">
-        ${coldLeads.map(c=>{
-          const days = Math.floor((today - new Date(c.status_updated_at)) / (1000*60*60*24));
-          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #FDE68A;cursor:pointer" onclick="openClientDetail('${c.id}')">
-            <div><span style="font-weight:600;font-size:13.5px">${c.name}</span> <span style="font-size:12px;color:var(--muted)">· ${STATUS_STYLES[c.status]?.label||c.status}</span></div>
-            <span style="font-size:12px;color:#92400E;font-weight:600">${days} días sin moverse</span>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>` : ''}
-
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
       ${callSection('📞', 'Llamadas de seguimiento', STATE.calls.filter(c=>c.kind==='llamada'), todayStr, quickActions)}
       ${callSection('⏰', 'Feedback pendiente de pedir', STATE.calls.filter(c=>c.kind==='feedback'), todayStr, quickActions)}
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+    <div style="display:grid;gap:20px;margin-bottom:20px">
       <div class="card">
         <h3 style="font-size:16px;margin-bottom:14px">✅ Confirmados (14 días)</h3>
         ${proximosBolos.map(g=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #F1EBDD;cursor:pointer" onclick="openGigDetail('${g.id}')">
@@ -626,21 +552,6 @@ function viewDashboard(){
           </div></div>`).join('') || '<p style="font-size:13px;color:var(--muted)">Sin bolos confirmados en los próximos 14 días</p>'}
         <button onclick="goTo('calendario')" style="background:none;border:none;color:var(--gold-btn);font-size:12.5px;font-weight:600;margin-top:12px;cursor:pointer">Ver calendario →</button>
       </div>
-      <div class="card">
-        <h3 style="font-size:16px;margin-bottom:14px">⏳ Pendientes por confirmar (1 mes)</h3>
-        ${proximosPendientes.map(g=>{
-          const roleLabel = g.performer_role==='animador' ? '🎭 Animador' : '🪄 Mago';
-          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #F1EBDD;cursor:pointer" onclick="openGigDetail('${g.id}')">
-          <div style="min-width:0" onclick="event.stopPropagation()"><div style="font-size:14px;font-weight:600">${g.clients?.name||'—'}</div><div style="font-size:12.5px;color:var(--muted)">${g.place||'—'} ${g.magician?'· '+roleLabel+': '+g.magician:''}</div></div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-            <span style="font-size:12px;color:var(--gold-btn);font-weight:600">${fmtDate(g.event_date)}</span>
-            ${quickActions(g.clients?.phone)}
-          </div></div>`;
-        }).join('') || '<p style="font-size:13px;color:var(--muted)">Nada pendiente de confirmar 🎉</p>'}
-        <button onclick="bolosStatusTab='pendientes'; goTo('bolos')" style="background:none;border:none;color:var(--gold-btn);font-size:12.5px;font-weight:600;margin-top:12px;cursor:pointer">Ver todos →</button>
-      </div>
-    </div>
-
     <div class="card" style="margin-bottom:20px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
         <h3 style="font-size:16px">Meta de facturación</h3>
