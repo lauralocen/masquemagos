@@ -226,13 +226,16 @@ function toast(msg){
    - En el desplegable hay ademas una opcion "Otro" para escribirlo libre.
    ========================================================================= */
 const SERVICIOS = [
-  {name:'Magia de cerca en el cóctel',        price:null},
-  {name:'Mesa a mesa',                        price:null},
-  {name:'Espectáculo de cierre',              price:null},
-  {name:'Maestro de ceremonias con magia',    price:null},
-  {name:'Levitación de la novia',             price:null},
-  {name:'Mentalismo',                         price:null},
-  {name:'Magia para niños',                   price:null},
+  {name:'Cumpleaños infantil',                          price:250},
+  {name:'Cumpleaños adulto',                            price:280},
+  {name:'Despedida de soltero/a',                       price:250},
+  {name:'Bautizo',                                      price:300},
+  {name:'Comunión',                                     price:350},
+  {name:'Boda',                                         price:400},
+  {name:'Maestro de ceremonias personalizado con magia', price:300},
+  {name:'Colegio',                                      price:350},
+  {name:'Asociación',                                   price:350},
+  {name:'Cena de empresa',                              price:360},
 ];
 
 function serviceOptions(){
@@ -646,7 +649,7 @@ function viewClientes(){
           <div class="avatar" style="background:${av.color}">${av.initials}</div>
           <div style="flex:1;min-width:0">
             <div style="font-size:14.5px;font-weight:600">${t.icon} ${c.name} ${bolosConfirmadosCount>1?'<span style="font-size:11px;background:#DCFCE7;color:#166534;padding:2px 7px;border-radius:100px;font-weight:700;margin-left:4px">🔁 repite</span>':''}</div>
-            <div style="font-size:12.5px;color:var(--muted)">${infoParts.join(' · ')||'Sin datos de contacto'} ${c.event_date?' · 📅 '+fmtDate(c.event_date):''}</div>
+            <div style="font-size:12.5px;color:var(--muted)">${infoParts.join(' · ')||'Sin datos de contacto'} ${c.event_date?' · 📅 '+fmtDate(c.event_date):''}${c.event_time?' · 🕐 '+c.event_time:''}</div>
           </div>
           <div style="display:flex;align-items:center;gap:10px;flex-shrink:0" onclick="event.stopPropagation()">
             ${c.phone?`<a href="https://wa.me/${c.phone.replace(/[^0-9+]/g,'')}" target="_blank" style="width:30px;height:30px;border-radius:8px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px">💬</a>
@@ -674,7 +677,7 @@ function openClientForm(){
         <div style="display:grid;gap:12px;margin-bottom:22px">
           <div><label class="f" id="nc-name-label">Nombre</label><input type="text" id="nc-name" oninput="checkDuplicateClient()" /></div>
           <div><label class="f">Tipo</label><select id="nc-type" onchange="toggleAgencyField()"><option value="particular">Particular</option><option value="empresa">Empresa</option><option value="ayuntamiento">Ayuntamiento</option><option value="colegio">Colegio</option><option value="agencia">Agencia de eventos</option><option value="asociacion">Asociación de fiestas</option></select></div>
-          <div id="nc-agency-wrap" style="display:none"><label class="f">Nombre de la agencia</label><input type="text" id="nc-agency-name" oninput="checkDuplicateClient()" placeholder="Ej: Eventos Barcelona SL" /></div>
+          <div id="nc-agency-wrap" style="display:none"><label class="f" id="nc-agency-label">Nombre de la agencia</label><input type="text" id="nc-agency-name" oninput="checkDuplicateClient()" placeholder="Ej: Eventos Barcelona SL" /></div>
           <div><label class="f">Teléfono</label><input type="tel" id="nc-phone" oninput="checkDuplicateClient()" /></div>
           <div><label class="f">Email</label><input type="email" id="nc-email" /></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -697,7 +700,7 @@ function openClientForm(){
         <div style="display:grid;gap:12px;margin-bottom:22px">
           <div><label class="f">Tipo de evento</label><input type="text" id="nc-event" placeholder="Comunión, boda, cena de empresa..." /></div>
           <div><label class="f">Fecha del evento (si ya la sabéis)</label><input type="date" id="nc-date" /></div>
-          <div><label class="f">Presupuesto aproximado que menciona (€)</label><input type="number" id="nc-budget" placeholder="Ej: 300" /></div>
+          <div><label class="f">Hora del evento (si ya la sabéis)</label><input type="text" id="nc-time" placeholder="Ej: 18:00" /></div>
         </div>
 
         <h4 style="font-size:11px;font-weight:700;color:var(--gold-btn);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Notas</h4>
@@ -711,10 +714,17 @@ function openClientForm(){
   document.body.insertAdjacentHTML('beforeend', html);
   setTimeout(()=>document.getElementById('nc-name')?.focus(), 50);
 }
+// Tipos que se guardan como "entidad + persona de contacto"
+const TIPOS_CON_ENTIDAD = ['agencia','empresa'];
+function labelEntidad(type){ return type === 'empresa' ? 'Nombre de la empresa' : 'Nombre de la agencia'; }
+
 function toggleAgencyField(){
-  const isAgencia = document.getElementById('nc-type').value === 'agencia';
-  document.getElementById('nc-agency-wrap').style.display = isAgencia ? 'block' : 'none';
-  document.getElementById('nc-name-label').textContent = isAgencia ? 'Persona de contacto' : 'Nombre';
+  const type = document.getElementById('nc-type').value;
+  const conEntidad = TIPOS_CON_ENTIDAD.includes(type);
+  document.getElementById('nc-agency-wrap').style.display = conEntidad ? 'block' : 'none';
+  document.getElementById('nc-agency-label').textContent = labelEntidad(type);
+  document.getElementById('nc-agency-name').placeholder = type === 'empresa' ? 'Ej: Panrico SA' : 'Ej: Eventos Barcelona SL';
+  document.getElementById('nc-name-label').textContent = conEntidad ? 'Persona de contacto' : 'Nombre';
   checkDuplicateClient();
 }
 function toggleOtroSource(){
@@ -722,16 +732,18 @@ function toggleOtroSource(){
   document.getElementById('nc-source-otro-wrap').style.display = isOtro ? 'block' : 'none';
 }
 function checkDuplicateClient(){
-  const isAgencia = document.getElementById('nc-type').value === 'agencia';
+  const tipo = document.getElementById('nc-type').value;
+  const isAgencia = TIPOS_CON_ENTIDAD.includes(tipo);
   const warningBox = document.getElementById('nc-duplicate-warning');
 
   if(isAgencia){
     const agencyName = (document.getElementById('nc-agency-name')?.value || '').trim().toLowerCase();
     if(!agencyName){ warningBox.style.display = 'none'; return; }
-    const match = STATE.clients.find(c => c.type==='agencia' && (c.agency_name||'').trim().toLowerCase() === agencyName);
+    const match = STATE.clients.find(c => c.type===tipo && (c.agency_name||'').trim().toLowerCase() === agencyName);
     if(match){
+      const palabra = tipo === 'empresa' ? 'la empresa' : 'la agencia';
       warningBox.style.display = 'block';
-      warningBox.innerHTML = `ℹ️ Ya existe ficha para la agencia <strong>${match.agency_name}</strong>. Al guardar, esta persona se añadirá como nuevo contacto dentro de esa misma ficha, en vez de crear un cliente nuevo.`;
+      warningBox.innerHTML = `ℹ️ Ya existe ficha para ${palabra} <strong>${match.agency_name}</strong>. Al guardar, esta persona se añadirá como nuevo contacto dentro de esa misma ficha, en vez de crear un cliente nuevo.`;
     } else {
       warningBox.style.display = 'none';
     }
@@ -757,19 +769,19 @@ function checkDuplicateClient(){
 async function saveClient(){
   const sourceValue = document.getElementById('nc-source').value;
   const source = sourceValue === 'Otro' ? document.getElementById('nc-source-otro').value : sourceValue;
-  const budget = document.getElementById('nc-budget').value;
   const notesText = document.getElementById('nc-notes').value;
   const type = document.getElementById('nc-type').value;
   const contactName = document.getElementById('nc-name').value;
   const phone = document.getElementById('nc-phone').value;
   const email = document.getElementById('nc-email').value;
 
-  if(type === 'agencia'){
+  if(TIPOS_CON_ENTIDAD.includes(type)){
+    const esEmpresa = type === 'empresa';
     const agencyName = document.getElementById('nc-agency-name').value.trim();
-    if(!agencyName){ toast('Ponle el nombre de la agencia'); return; }
+    if(!agencyName){ toast(esEmpresa ? 'Ponle el nombre de la empresa' : 'Ponle el nombre de la agencia'); return; }
     if(!contactName){ toast('Ponle el nombre de la persona de contacto'); return; }
 
-    const existing = STATE.clients.find(c => c.type==='agencia' && (c.agency_name||'').trim().toLowerCase() === agencyName.toLowerCase());
+    const existing = STATE.clients.find(c => c.type===type && (c.agency_name||'').trim().toLowerCase() === agencyName.toLowerCase());
 
     if(existing){
       // Ya existe ficha de esta agencia: añadir esta persona como contacto nuevo, sin crear cliente nuevo
@@ -784,18 +796,18 @@ async function saveClient(){
       return;
     }
 
-    // No existe todavía: crear la ficha de agencia y su primer contacto
+    // No existe todavía: crear la ficha y su primer contacto
     const payload = {
       name: agencyName,
       agency_name: agencyName,
-      type: 'agencia',
+      type: type,
       event_type: document.getElementById('nc-event').value,
       phone, email,
       locality: document.getElementById('nc-locality').value,
       province: document.getElementById('nc-province').value,
       source: source,
       event_date: document.getElementById('nc-date').value || null,
-      budget_estimate: budget ? Number(budget) : null,
+      event_time: document.getElementById('nc-time').value || null,
     };
     const {data, error} = await sb.from('clients').insert(payload).select().single();
     if(error){ toast('Error al guardar'); console.error(error); return; }
@@ -803,7 +815,7 @@ async function saveClient(){
     if(notesText.trim()){
       await sb.from('notes').insert({client_id: data.id, text: `Contactó ${contactName}: ${notesText.trim()}`});
     }
-    closeDrawer(); await loadAll(); render(); toast('Ficha de agencia creada');
+    closeDrawer(); await loadAll(); render(); toast(esEmpresa ? 'Ficha de empresa creada' : 'Ficha de agencia creada');
     return;
   }
 
@@ -816,7 +828,7 @@ async function saveClient(){
     province: document.getElementById('nc-province').value,
     source: source,
     event_date: document.getElementById('nc-date').value || null,
-    budget_estimate: budget ? Number(budget) : null,
+    event_time: document.getElementById('nc-time').value || null,
   };
   if(!payload.name){ toast('Ponle un nombre al cliente'); return; }
   const {data, error} = await sb.from('clients').insert(payload).select().single();
@@ -855,7 +867,8 @@ async function openClientDetail(id){
           ${Object.keys(STATUS_STYLES).map(s=>`<option value="${s}" ${s===c.status?'selected':''}>${STATUS_STYLES[s].label}</option>`).join('')}
         </select>
         <div style="display:grid;gap:10px;margin-bottom:10px">
-          <div><label class="f">Nombre</label><input type="text" id="cd-name" value="${c.name||''}" /></div>
+          <div><label class="f">${TIPOS_CON_ENTIDAD.includes(c.type)?'Persona de contacto':'Nombre'}</label><input type="text" id="cd-name" value="${c.name||''}" /></div>
+          ${TIPOS_CON_ENTIDAD.includes(c.type) ? `<div><label class="f">${labelEntidad(c.type)}</label><input type="text" id="cd-agency-name" value="${c.agency_name||''}" /></div>` : ''}
           <div><label class="f">Tipo</label><select id="cd-type">
             <option value="particular" ${c.type==='particular'?'selected':''}>Particular</option>
             <option value="empresa" ${c.type==='empresa'?'selected':''}>Empresa</option>
@@ -866,7 +879,7 @@ async function openClientDetail(id){
           </select></div>
           <div><label class="f">Tipo de evento</label><input type="text" id="cd-event" value="${c.event_type||''}" /></div>
           <div><label class="f">Fecha del evento (si ya la sabéis)</label><input type="date" id="cd-event-date" value="${c.event_date||''}" /></div>
-          <div><label class="f">Presupuesto aproximado que menciona (€)</label><input type="number" id="cd-budget" value="${c.budget_estimate||''}" /></div>
+          <div><label class="f">Hora del evento (si ya la sabéis)</label><input type="text" id="cd-event-time" value="${c.event_time||''}" placeholder="Ej: 18:00" /></div>
           <div><label class="f">Teléfono</label><input type="tel" id="cd-phone" value="${c.phone||''}" /></div>
           <div><label class="f">Email</label><input type="email" id="cd-email" value="${c.email||''}" /></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -877,7 +890,7 @@ async function openClientDetail(id){
         </div>
         <button class="btn" style="width:100%;margin-bottom:22px" onclick="saveClientEdits('${c.id}')">Guardar cambios del cliente</button>
 
-        ${c.type==='agencia' ? `
+        ${TIPOS_CON_ENTIDAD.includes(c.type) ? `
         <h3 style="font-size:15px;margin-bottom:10px">Contactos de la agencia</h3>
         <div style="display:grid;gap:8px;margin-bottom:14px">
           ${(c.client_contacts||[]).length===0?'<p style="font-size:13px;color:var(--muted);font-style:italic">Sin contactos registrados todavía.</p>':''}
@@ -974,12 +987,13 @@ async function saveClientEdits(id){
     type: document.getElementById('cd-type').value,
     event_type: document.getElementById('cd-event').value,
     event_date: document.getElementById('cd-event-date').value || null,
+    event_time: document.getElementById('cd-event-time').value || null,
+    agency_name: document.getElementById('cd-agency-name')?.value || null,
     phone: document.getElementById('cd-phone').value,
     email: document.getElementById('cd-email').value,
     locality: document.getElementById('cd-locality').value,
     province: document.getElementById('cd-province').value,
     source: document.getElementById('cd-source').value,
-    budget_estimate: document.getElementById('cd-budget').value ? Number(document.getElementById('cd-budget').value) : null,
   };
   if(!payload.name){ toast('El nombre no puede quedar vacío'); return; }
   await sb.from('clients').update(payload).eq('id', id);
