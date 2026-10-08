@@ -217,6 +217,50 @@ function toast(msg){
   setTimeout(()=>t.classList.remove('show'), 2200);
 }
 
+/* =========================================================================
+   SERVICIOS Y PRECIOS
+   Edita SOLO esta lista para cambiar los servicios o sus precios.
+   - price: el precio fijo en euros. Si lo dejas en null, el campo sale vacio.
+   - Al elegir un servicio el precio se rellena solo, pero SIEMPRE se puede
+     modificar a mano antes de guardar.
+   - En el desplegable hay ademas una opcion "Otro" para escribirlo libre.
+   ========================================================================= */
+const SERVICIOS = [
+  {name:'Magia de cerca en el cóctel',        price:null},
+  {name:'Mesa a mesa',                        price:null},
+  {name:'Espectáculo de cierre',              price:null},
+  {name:'Maestro de ceremonias con magia',    price:null},
+  {name:'Levitación de la novia',             price:null},
+  {name:'Mentalismo',                         price:null},
+  {name:'Magia para niños',                   price:null},
+];
+
+function serviceOptions(){
+  return SERVICIOS.map((sv,i)=>`<option value="${i}">${sv.name}${sv.price!=null?' — '+sv.price+'€':''}</option>`).join('');
+}
+// Rellena el precio al elegir servicio y muestra el campo libre si eligen "Otro"
+function onServiceChange(prefix){
+  const sel   = document.getElementById(prefix+'-service');
+  const otro  = document.getElementById(prefix+'-service-otro');
+  const price = document.getElementById(prefix+'-price');
+  if(sel.value === 'otro'){
+    otro.style.display = '';
+    otro.focus();
+  } else {
+    otro.style.display = 'none';
+    const sv = SERVICIOS[Number(sel.value)];
+    if(sv && sv.price != null) price.value = sv.price;
+  }
+}
+// Devuelve el nombre del servicio elegido (del desplegable o escrito a mano)
+function readService(prefix){
+  const sel = document.getElementById(prefix+'-service');
+  if(!sel) return null;
+  if(sel.value === 'otro') return document.getElementById(prefix+'-service-otro').value.trim() || null;
+  const sv = SERVICIOS[Number(sel.value)];
+  return sv ? sv.name : null;
+}
+
 const TYPE_STYLES = {
   particular: { label:'Particular', bg:'#EEF2FF', text:'#4338CA', icon:'👤' },
   empresa: { label:'Empresa', bg:'#F0FDF4', text:'#15803D', icon:'🏢' },
@@ -825,15 +869,6 @@ async function saveClient(){
       if(notesText.trim()){
         await sb.from('notes').insert({client_id: existing.id, text: `Contactó ${contactName}: ${notesText.trim()}`});
       }
-      const followUp = new Date();
-      followUp.setDate(followUp.getDate() + 1);
-      await sb.from('calls').insert({
-        client_id: existing.id,
-        reason: `Contactar con ${contactName} (${agencyName})`,
-        due_date: localDateStr(followUp),
-        kind: 'llamada',
-        category: 'lead_contact',
-      });
       closeDrawer(); await loadAll(); render(); toast('Contacto añadido a la ficha existente de ' + agencyName);
       return;
     }
@@ -857,15 +892,6 @@ async function saveClient(){
     if(notesText.trim()){
       await sb.from('notes').insert({client_id: data.id, text: `Contactó ${contactName}: ${notesText.trim()}`});
     }
-    const followUp = new Date();
-    followUp.setDate(followUp.getDate() + 1);
-    await sb.from('calls').insert({
-      client_id: data.id,
-      reason: `Contactar con ${contactName} (${agencyName})`,
-      due_date: localDateStr(followUp),
-      kind: 'llamada',
-      category: 'lead_contact',
-    });
     closeDrawer(); await loadAll(); render(); toast('Ficha de agencia creada');
     return;
   }
@@ -887,15 +913,6 @@ async function saveClient(){
   if(notesText.trim()){
     await sb.from('notes').insert({client_id: data.id, text: notesText.trim()});
   }
-  const followUp = new Date();
-  followUp.setDate(followUp.getDate() + 1);
-  await sb.from('calls').insert({
-    client_id: data.id,
-    reason: 'Contactar con el lead',
-    due_date: localDateStr(followUp),
-    kind: 'llamada',
-    category: 'lead_contact',
-  });
   closeDrawer(); await loadAll(); render(); toast('Cliente guardado');
 }
 
@@ -914,7 +931,6 @@ async function openClientDetail(id){
   const t=TYPE_STYLES[c.type];
   const notes = (c.notes||[]).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   const gigs = STATE.gigs.filter(g=>g.client_id===id).sort((a,b)=>new Date(b.event_date||0)-new Date(a.event_date||0));
-  const presupuestos = gigs.filter(g=>g.magician_status !== 'confirmado');
   const bolosConfirmados = gigs.filter(g=>g.magician_status === 'confirmado');
   const html = `
     <div class="drawer-bg">
@@ -967,46 +983,6 @@ async function openClientDetail(id){
         </div>
         ` : ''}
 
-        <h3 style="font-size:15px;margin-bottom:10px">Presupuestado</h3>
-        <div style="display:grid;gap:8px;margin-bottom:14px">
-          ${presupuestos.length===0?'<p style="font-size:13px;color:var(--muted);font-style:italic">Sin presupuestos registrados todavía.</p>':''}
-          ${presupuestos.map(g=>`<div style="background:var(--warm);border-radius:10px;padding:12px 14px;font-size:13px">
-            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-              <strong>${g.event_date?fmtDate(g.event_date):'Sin fecha'} ${g.event_time?'· '+g.event_time:''}</strong>
-              <span>
-                <button onclick="openGigDetail('${g.id}')" style="background:none;border:none;color:var(--gold-btn);font-size:12px;font-weight:600;cursor:pointer;margin-right:10px">Editar</button>
-                <button onclick="deleteGig('${g.id}','${c.id}')" style="background:none;border:none;color:#991B1B;font-size:12px;cursor:pointer">Borrar</button>
-              </span>
-            </div>
-            <div style="color:var(--muted)">${g.place||'Lugar sin especificar'}</div>
-            <div style="color:var(--muted)">${g.performer_role==='animador'?'🎭 Animador':'🪄 Mago'}: ${g.magician||'—'} ${g.price?'· '+Number(g.price).toFixed(2)+'€':''} · ${magoStatusLabel(g.magician_status)}</div>
-          </div>`).join('')}
-        </div>
-        <div style="display:grid;gap:8px;margin-bottom:22px;padding:14px;border:1px dashed var(--border);border-radius:10px">
-          <label class="f" style="margin-bottom:0">Añadir presupuesto</label>
-          <input type="text" id="np-place" placeholder="Lugar" />
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <input type="date" id="np-date" />
-            <input type="text" id="np-time" placeholder="Hora (ej: 18:00)" />
-          </div>
-          <select id="np-role" onchange="filterPerformerSelect('np')">
-            <option value="mago">🪄 Mago</option>
-            <option value="animador">🎭 Animador</option>
-          </select>
-          <select id="np-magician">
-            <option value="">Sin mago asignado</option>
-            ${STATE.magicians.filter(m=>(m.role||'mago')==='mago').map(m=>`<option value="${m.id}">${m.name}</option>`).join('')}
-          </select>
-          <input type="text" id="np-magician-manual" placeholder="...o escribe el nombre a mano" />
-          <input type="number" id="np-price" placeholder="Precio al que se ha presupuestado (€)" />
-          <select id="np-status">
-            <option value="pendiente">Pendiente</option>
-            <option value="confirmado">Confirmado</option>
-            <option value="rechazado">Rechazado</option>
-          </select>
-          <button class="btn secondary" onclick="addPresupuesto('${c.id}')">Guardar presupuesto</button>
-        </div>
-
         <h3 style="font-size:15px;margin-bottom:10px">Bolo</h3>
         <div style="display:grid;gap:8px;margin-bottom:14px">
           ${bolosConfirmados.length===0?'<p style="font-size:13px;color:var(--muted);font-style:italic">Sin bolos confirmados todavía.</p>':''}
@@ -1019,7 +995,7 @@ async function openClientDetail(id){
               </span>
             </div>
             <div style="color:var(--muted)">${g.place||'Lugar sin especificar'}</div>
-            <div style="color:var(--muted)">${g.performer_role==='animador'?'🎭 Animador':'🪄 Mago'}: ${g.magician||'—'} ${g.price?'· '+Number(g.price).toFixed(2)+'€':''} ${g.billing_month?'· Se factura: '+g.billing_month:''}</div>
+            <div style="color:var(--muted)">${g.service?'<strong>'+g.service+'</strong> · ':''}${g.performer_role==='animador'?'🎭 Animador':'🪄 Mago'}: ${g.magician||'sin asignar'} ${g.price?'· '+Number(g.price).toFixed(2)+'€':''} ${g.billing_month?'· Se factura: '+g.billing_month:''}</div>
             ${g.feedback?`<div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(196,151,61,.2)"><strong>Feedback:</strong> ${g.feedback}</div>`:`<button onclick="promptFeedback('${g.id}','${c.id}')" style="margin-top:6px;background:none;border:none;color:var(--gold-btn);font-size:12px;font-weight:600;cursor:pointer">+ Añadir feedback</button>`}
           </div>`).join('')}
         </div>
@@ -1030,15 +1006,16 @@ async function openClientDetail(id){
             <input type="date" id="nb-date" />
             <input type="text" id="nb-time" placeholder="Hora (ej: 18:00)" />
           </div>
-          <select id="nb-role" onchange="filterPerformerSelect('nb')">
+          <select id="nb-role">
             <option value="mago">🪄 Mago</option>
             <option value="animador">🎭 Animador</option>
           </select>
-          <select id="nb-magician">
-            <option value="">Sin mago asignado</option>
-            ${STATE.magicians.filter(m=>(m.role||'mago')==='mago').map(m=>`<option value="${m.id}">${m.name}</option>`).join('')}
+          <select id="nb-service" onchange="onServiceChange('nb')">
+            <option value="">— Elige el servicio —</option>
+            ${serviceOptions()}
+            <option value="otro">✏️ Otro (escribirlo)</option>
           </select>
-          <input type="text" id="nb-magician-manual" placeholder="...o escribe el nombre a mano" />
+          <input type="text" id="nb-service-otro" placeholder="Escribe el servicio" style="display:none" />
           <input type="number" id="nb-price" placeholder="Precio cobrado (€)" />
           <div><label class="f">Mes en que se factura (para Finanzas)</label><div style="display:flex;gap:8px">${billingMonthSelects('nb-billing-month', '')}</div></div>
           <button class="btn secondary" onclick="addBolo('${c.id}')">Guardar bolo</button>
@@ -1077,30 +1054,7 @@ function closeAllDrawers(){
   document.querySelectorAll('.drawer-bg').forEach(el=>el.remove());
 }
 async function updateStatus(id, status){
-  const previous = STATE.clients.find(c=>c.id===id);
   await sb.from('clients').update({status, status_updated_at: new Date().toISOString()}).eq('id', id);
-  if(status === 'presupuestado' && previous?.status !== 'presupuestado'){
-    const followUp = new Date();
-    followUp.setDate(followUp.getDate() + 3);
-    await sb.from('calls').insert({
-      client_id: id,
-      reason: 'Seguimiento del presupuesto enviado',
-      due_date: localDateStr(followUp),
-      kind: 'llamada',
-      category: 'presupuesto_seguimiento',
-    });
-  }
-  if(status === 'contactado' && previous?.status !== 'contactado'){
-    const followUp = new Date();
-    followUp.setDate(followUp.getDate() + 1);
-    await sb.from('calls').insert({
-      client_id: id,
-      reason: 'Enviar presupuesto',
-      due_date: localDateStr(followUp),
-      kind: 'llamada',
-      category: 'presupuesto_enviar',
-    });
-  }
   await loadAll(); render(); toast('Estado actualizado');
 }
 async function saveClientEdits(id){
@@ -1157,95 +1111,18 @@ function filterPerformerSelect(prefix){
   const matching = STATE.magicians.filter(m=>(m.role||'mago')===role);
   select.innerHTML = `<option value="">Sin ${role} asignado</option>` + matching.map(m=>`<option value="${m.id}">${m.name}</option>`).join('');
 }
-async function addPresupuesto(clientId){
-  const place = document.getElementById('np-place').value;
-  const date = document.getElementById('np-date').value;
-  const time = document.getElementById('np-time').value;
-  const role = document.getElementById('np-role').value;
-  const magicianId = document.getElementById('np-magician').value;
-  const magicianManual = document.getElementById('np-magician-manual').value;
-  const magicianObj = STATE.magicians.find(m=>m.id===magicianId);
-  const magicianName = magicianManual || magicianObj?.name || null;
-  const magicianStatus = document.getElementById('np-status').value;
-  const price = document.getElementById('np-price').value;
-  if(!date){ toast('Ponle al menos una fecha al presupuesto'); return; }
-  const {error} = await sb.from('gigs').insert({client_id: clientId, place, event_date: date, event_time: time, magician_id: magicianManual?null:(magicianId||null), magician: magicianName, magician_status: magicianStatus, performer_role: role, price: price?Number(price):null});
-  if(error){ toast('Error al guardar: '+error.message); console.error(error); return; }
-  if(magicianStatus !== 'confirmado'){
-    const followUp = new Date();
-    followUp.setDate(followUp.getDate() + 3);
-    await sb.from('calls').insert({
-      client_id: clientId,
-      reason: `Seguimiento del bolo presupuestado${place?' en '+place:''} (aún sin confirmar)`,
-      due_date: localDateStr(followUp),
-      kind: 'llamada',
-      category: 'bolo_seguimiento',
-    });
-  }
-  await loadAll(); render(); openClientDetail(clientId); toast('Presupuesto guardado');
-}
 async function addBolo(clientId){
   const place = document.getElementById('nb-place').value;
   const date = document.getElementById('nb-date').value;
   const time = document.getElementById('nb-time').value;
   const role = document.getElementById('nb-role').value;
-  const magicianId = document.getElementById('nb-magician').value;
-  const magicianManual = document.getElementById('nb-magician-manual').value;
-  const magicianObj = STATE.magicians.find(m=>m.id===magicianId);
-  const magicianName = magicianManual || magicianObj?.name || null;
+  const service = readService('nb');
   const price = document.getElementById('nb-price').value;
   const billingMonth = readBillingMonth('nb-billing-month');
   if(!date){ toast('Ponle al menos una fecha al bolo'); return; }
-  const {error} = await sb.from('gigs').insert({client_id: clientId, place, event_date: date, event_time: time, magician_id: magicianManual?null:(magicianId||null), magician: magicianName, magician_status: 'confirmado', performer_role: role, price: price?Number(price):null, billing_month: billingMonth});
+  const {error} = await sb.from('gigs').insert({client_id: clientId, place, event_date: date, event_time: time, magician_status: 'confirmado', performer_role: role, service, price: price?Number(price):null, billing_month: billingMonth});
   if(error){ toast('Error al guardar: '+error.message); console.error(error); return; }
-  const feedbackDate = new Date(date);
-  feedbackDate.setDate(feedbackDate.getDate() + 1);
-  await sb.from('calls').insert({
-    client_id: clientId,
-    reason: `Pedir feedback del bolo${place?' en '+place:''}`,
-    due_date: localDateStr(feedbackDate),
-    kind: 'feedback',
-    category: 'feedback',
-  });
-  await loadAll(); render(); openClientDetail(clientId); toast('Bolo guardado y feedback programado para el día siguiente');
-}
-async function addGig(clientId){
-  const place = document.getElementById('ng-place').value;
-  const date = document.getElementById('ng-date').value;
-  const time = document.getElementById('ng-time').value;
-  const magicianId = document.getElementById('ng-magician').value;
-  const magicianManual = document.getElementById('ng-magician-manual').value;
-  const magicianObj = STATE.magicians.find(m=>m.id===magicianId);
-  const magicianName = magicianManual || magicianObj?.name || null;
-  const magicianStatus = document.getElementById('ng-magician-status').value;
-  const price = document.getElementById('ng-price').value;
-  const billingMonth = readBillingMonth('ng-billing-month');
-  if(!date){ toast('Ponle al menos una fecha al bolo'); return; }
-  await sb.from('gigs').insert({client_id: clientId, place, event_date: date, event_time: time, magician_id: magicianManual?null:(magicianId||null), magician: magicianName, magician_status: magicianStatus, price: price?Number(price):null, billing_month: billingMonth});
-  if(magicianStatus === 'confirmado'){
-    const feedbackDate = new Date(date);
-    feedbackDate.setDate(feedbackDate.getDate() + 1);
-    await sb.from('calls').insert({
-      client_id: clientId,
-      reason: `Pedir feedback del bolo${place?' en '+place:''}`,
-      due_date: localDateStr(feedbackDate),
-      kind: 'feedback',
-      category: 'feedback',
-    });
-  } else {
-    const followUp = new Date();
-    followUp.setDate(followUp.getDate() + 3);
-    await sb.from('calls').insert({
-      client_id: clientId,
-      reason: `Seguimiento del bolo presupuestado${place?' en '+place:''} (aún sin confirmar)`,
-      due_date: localDateStr(followUp),
-      kind: 'llamada',
-      category: 'bolo_seguimiento',
-    });
-  }
-  closeDrawer(); await loadAll(); render();
-  toast(magicianStatus === 'confirmado' ? 'Bolo guardado y feedback programado para el día siguiente' : 'Bolo guardado');
-  openClientDetail(clientId);
+  await loadAll(); render(); openClientDetail(clientId); toast('Bolo guardado');
 }
 async function deleteGig(gigId, clientId){
   if(!confirm('¿Borrar este bolo?')) return;
@@ -1395,23 +1272,11 @@ async function saveGigDetails(gigId, clientId){
   const price = document.getElementById('gig-price').value;
   const billingMonth = readBillingMonth('gig-billing-month');
   const previousGig = STATE.gigs.find(x=>x.id===gigId);
-  const wasConfirmed = previousGig?.magician_status === 'confirmado';
   const {error: updGigErr} = await sb.from('gigs').update({place, event_date, event_time, magician_id: magicianManual?null:(magicianId||null), magician: magicianName, magician_status: magicianStatus, price: price?Number(price):null, billing_month: billingMonth}).eq('id', gigId);
   if(updGigErr){
     alert('Error al guardar el bolo: ' + updGigErr.message);
     console.error(updGigErr);
     return;
-  }
-  if(magicianStatus === 'confirmado' && !wasConfirmed && event_date){
-    const feedbackDate = new Date(event_date);
-    feedbackDate.setDate(feedbackDate.getDate() + 1);
-    await sb.from('calls').insert({
-      client_id: clientId || previousGig?.client_id,
-      reason: `Pedir feedback del bolo${place?' en '+place:''}`,
-      due_date: localDateStr(feedbackDate),
-      kind: 'feedback',
-      category: 'feedback',
-    });
   }
   const stacked = document.querySelectorAll('.drawer-bg').length > 1;
   closeAllDrawers(); await loadAll(); render();
