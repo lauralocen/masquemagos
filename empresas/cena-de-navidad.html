@@ -24,7 +24,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:url" content="https://www.masquemagos.com/empresas/cena-de-navidad" />
   <meta property="og:title" content="Magia para la cena de Navidad de empresa — Más que Magos" />
   <meta property="og:description" content="Magia de cerca en el cóctel, mesa a mesa o como cierre antes del brindis. Diciembre se llena primero." />
-  <meta property="og:image" content="https://www.masquemagos.com/images/empresas/convenciones.jpg" />
+  <meta property="og:image" content="https://www.masquemagos.com/images/empresas/cena-navidad-hero.jpg" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:site_name" content="Más que Magos" />
 
@@ -119,6 +119,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .xn-hero__title strong { font-weight: 700; font-style: italic; color: #e8c97a; }
     .xn-hero__sub { font-size: clamp(18px, 1.7vw, 22px); color: var(--white-dim); max-width: 540px; margin-bottom: 30px; }
+    /* Botón solo móvil, como el de "¿Tienes un evento familiar?" del home */
+    .xn-mobcta {
+      display: none; align-self: flex-start; margin-bottom: 22px;
+      padding: 11px 24px; border-radius: 100px; background: #c9a84c; color: #0a0a0a;
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 800; font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+      text-decoration: none;
+    }
+    @media (max-width: 768px) { .xn-mobcta { display: inline-block; } }
+    @media (min-width: 769px) { .xn-mobcta { display: none; } }
     .xn-hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
     .xn-hero__note { margin-top: 22px; font-size: 16px; color: rgba(245,240,232,.6); }
     .xn-hero__note strong { color: #e8c97a; font-weight: 600; }
@@ -140,8 +150,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .xn-logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 8px; }
     .xn-logo { background: #fff; border-radius: 12px; aspect-ratio: 3/2; display: flex; align-items: center; justify-content: center; padding: 14px; }
     .xn-logo img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
-    .xn-dossier { text-align: center; margin-top: 28px; font-size: 17px; color: rgba(245,240,232,.6); }
-    .xn-dossier a { color: #c9a84c; text-decoration: underline; }
 
     /* ── Tarjetas de formatos e ideas ── */
     .xn-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -171,6 +179,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-radius: 10px; padding: 22px 26px; font-size: 19px; color: rgba(245,240,232,.85);
     }
     .xn-callout strong { color: #e8c97a; }
+    .xn-shot { position: relative; width: 100%; overflow: hidden; }
+    .xn-shot img { width: 100%; height: clamp(300px, 42vw, 560px); object-fit: cover; object-position: center 42%; display: block; }
+    .xn-shot::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,0) 22%, rgba(10,10,10,0) 76%, rgba(10,10,10,.75) 100%); }
+    @media (max-width: 680px) { .xn-shot img { height: 260px; object-position: center 40%; } }
+    .xn-band { display: grid; grid-template-columns: 320px 1fr; gap: 34px; align-items: center;
+      max-width: 940px; margin: 48px auto 0; }
+    .xn-band__img { border-radius: 14px; overflow: hidden; aspect-ratio: 4/5; }
+    .xn-band__img img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+    .xn-band .xn-callout { margin: 0; max-width: none; }
+    @media (max-width: 760px) {
+      .xn-band { grid-template-columns: 1fr; gap: 20px; }
+      .xn-band__img { aspect-ratio: 16/10; }
+      .xn-band__img img { object-position: center 25%; }
+    }
     .xn-quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
     .xn-quote {
       background: #0d0b08; border: 1px solid rgba(201,168,76,.28); border-radius: 14px;
@@ -260,9 +283,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- HERO -->
     <section class="xn-hero">
       <div class="xn-hero__text">
+        <a href="#contacto" class="xn-mobcta">¿Tienes una cena de empresa?</a>
         <span class="xn-eyebrow">Cenas de Navidad 2026</span>
         <h1 class="xn-hero__title">Magia para la cena de Navidad de <strong>vuestra empresa</strong></h1>
-        <p class="xn-hero__sub">Magia de cerca en el cóctel, mesa a mesa entre platos o como cierre antes del brindis. Sin escenario y sin complicar la organización.</p>
+        <p class="xn-hero__sub">Magia de cerca en el cóctel, mesa a mesa entre platos o como cierre antes del brindis. No hace falta escenario ni una gran logística. Trabajamos en toda España.</p>
         <div class="xn-hero__ctas">
           <a href="#contacto" class="xn-btn xn-btn--gold">Pedir presupuesto</a>
           <a href="https://wa.me/34616094587?text=Hola!%20Quiero%20informaci%C3%B3n%20para%20la%20cena%20de%20Navidad%20de%20mi%20empresa" class="xn-btn xn-btn--wa" target="_blank" rel="noopener">
@@ -273,9 +297,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="xn-hero__note"><strong>Diciembre se llena primero.</strong> Te respondemos en menos de 24 horas.</p>
       </div>
       <div class="xn-hero__image">
-        <img src="/images/empresas/convenciones.jpg" alt="Mago mostrando una carta en primer plano" width="900" height="1125" fetchpriority="high" />
+        <img src="/images/empresas/cena-navidad-hero.jpg" alt="Manos de mago con una baraja de cartas en primer plano" width="1100" height="1955" fetchpriority="high" />
       </div>
     </section>
+
+    <!-- FOTO ANCHA -->
+    <figure class="xn-shot">
+      <img src="/images/empresas/cena-empresa-mesa.jpg" alt="Mago haciendo magia de cerca en la mesa durante una cena de empresa" loading="eager" width="1408" height="768" />
+    </figure>
 
     <!-- CONFIANZA -->
     <section class="xn-sec xn-sec--soft">
@@ -290,7 +319,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="xn-logo"><img src="/images/clientes/nestle-purina.png" alt="Nestlé Purina" loading="lazy" width="240" height="120" /></div>
           <div class="xn-logo"><img src="/images/clientes/sony.png" alt="Sony" loading="lazy" width="240" height="120" /></div>
         </div>
-        <p class="xn-dossier">¿Quieres ver casos completos? <a href="https://canva.link/udxacdblhfq80el" target="_blank" rel="noopener noreferrer">Descarga el dossier de empresa</a>.</p>
 
         <div class="xn-quotes">
 
@@ -299,7 +327,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p><strong>La magia de cerca hizo que todos participaran, se rieran y se quedaran con la boca abierta.</strong></p>
               <p>Una forma original de romper el hielo, fomentar la conexión entre compañeros y convertir una cena de empresa en una experiencia inolvidable.</p>
             </blockquote>
-            <figcaption class="xn-quote__by">PENDIENTE 1: nombre · cargo · empresa</figcaption>
+            <figcaption class="xn-quote__by">Responsable de marketing · multinacional del deporte</figcaption>
           </figure>
 
           <figure class="xn-quote">
@@ -307,7 +335,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p>Contratamos a un mago para nuestra cena de empresa de <strong>40 personas</strong> y fue todo un acierto. El espectáculo, durante los cafés y después de la cena, sorprendió a todos los asistentes y creó un ambiente lleno de risas y asombro.</p>
               <p>Fue el broche de oro perfecto para una velada especial.</p>
             </blockquote>
-            <figcaption class="xn-quote__by">PENDIENTE 2: nombre · cargo · empresa</figcaption>
+            <figcaption class="xn-quote__by">Responsable de RRHH · consultoría · 40 personas</figcaption>
           </figure>
 
           <figure class="xn-quote">
@@ -315,7 +343,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p>Queríamos organizar una cena de empresa diferente. La actuación del mago superó todas nuestras expectativas.</p>
               <p><strong>Lo mejor fue ver cómo todos, incluso los más escépticos, acababan intentando descubrir el secreto detrás de cada efecto.</strong></p>
             </blockquote>
-            <figcaption class="xn-quote__by">PENDIENTE 3: nombre · cargo · empresa</figcaption>
+            <figcaption class="xn-quote__by">Asistente de dirección · empresa de logística</figcaption>
           </figure>
 
         </div>
@@ -349,7 +377,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- IDEAS -->
     <section class="xn-sec xn-ideas">
-      <div class="xn-ideas__bg"><img src="/images/empresas/cenas-empresa.jpg" alt="" loading="lazy" width="900" height="600" /></div>
+      <div class="xn-ideas__bg"><img src="/images/empresas/cena-navidad-ideas.jpg" alt="" loading="lazy" width="1400" height="1886" style="object-position:center 35%" /></div>
       <div class="xn-wrap">
         <h2 class="xn-h2">Ideas para que no sea una cena más</h2>
         <p class="xn-lead">La diferencia entre una cena más y la cena de la que se habla el lunes suele ser un solo momento que nadie esperaba.</p>
@@ -380,7 +408,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="xn-step"><div class="xn-step__n">2</div><p>Te respondemos en menos de 24 horas con una propuesta de formato.</p></div>
           <div class="xn-step"><div class="xn-step__n">3</div><p>Cerramos presupuesto y fecha, y el mago se coordina con el restaurante.</p></div>
         </div>
-        <div class="xn-callout"><strong>Las fechas de diciembre son las primeras que se llenan.</strong> Si ya tenéis restaurante y fecha, reservad también la magia en octubre o a principios de noviembre.</div>
+        <div class="xn-band">
+          <div class="xn-band__img"><img src="/images/empresas/mago-vela.jpg" alt="Mago con una carta a la luz de una vela" loading="lazy" width="1200" height="1500" /></div>
+          <div class="xn-callout"><strong>Las fechas de diciembre son las primeras que se llenan.</strong> Si ya tenéis restaurante y fecha, reservad también la magia en octubre o a principios de noviembre.</div>
+        </div>
       </div>
     </section>
 
