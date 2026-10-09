@@ -175,22 +175,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .emp-filosofia__text { text-shadow: 0 2px 12px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9) !important; }
   </style>
 <style>
-  /* Botón de cenas de Navidad en el hero (se activa por JS, ver script al final) */
-  .mqm-xmas-btn { display: none; }
-  .mqm-xmas-btn.is-on {
-    display: inline-flex; align-items: center; gap: 9px;
-    margin-top: 16px; padding: 14px 28px; border-radius: 100px;
-    background: #0e0b07; border: 1.5px solid #C4973D; color: #e8c97a;
-    text-decoration: none; font-weight: 700; font-size: 15px;
-    transition: background .25s ease, transform .2s ease;
+  /* Banda de cenas de Navidad: fija arriba, solo en ordenador.
+     En movil no aparece porque ahi ya esta el boton de eventos familiares.
+     Se activa por JS y caduca sola el 1 de enero (ver script al final del body). */
+  :root { --xmas-h: 44px; }
+  .mqm-xmas-bar { display: none; }
+  @media (min-width: 769px) {
+    .mqm-xmas-bar.is-on {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: var(--xmas-h);
+      background: linear-gradient(90deg, #8a6425 0%, #c9a84c 50%, #8a6425 100%);
+      color: #15100a; text-decoration: none;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 15px; font-weight: 700; line-height: 1; letter-spacing: .01em;
+    }
+    .mqm-xmas-bar.is-on:hover { filter: brightness(1.07); }
+    .mqm-xmas-bar span { all: unset; }
+    .mqm-xmas-bar .mqm-xmas-sep { opacity: .5; }
+    .mqm-xmas-bar .mqm-xmas-cta { text-decoration: underline; text-underline-offset: 3px; }
+    html.has-xmas .nav { top: var(--xmas-h); }
   }
-  .mqm-xmas-btn.is-on:hover { background: #C4973D; color: #1a1005; transform: translateY(-2px); }
-  .mqm-xmas-btn .mqm-xmas-dot { width: 7px; height: 7px; border-radius: 50%; background: #C4973D; flex: none; }
-  .mqm-xmas-btn.is-on:hover .mqm-xmas-dot { background: #1a1005; }
-  @media (max-width: 768px) { .mqm-xmas-btn { display: none !important; } }
+  @media (max-width: 768px) { .mqm-xmas-bar { display: none !important; } }
 </style>
 </head>
 <body>
+<a class="mqm-xmas mqm-xmas-bar" href="/empresas/cena-de-navidad"><span>Cenas de Navidad 2026</span><span class="mqm-xmas-sep">&middot;</span><span class="mqm-xmas-cta">Consulta disponibilidad &rsaquo;</span></a>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THR68GGS"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -253,9 +262,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Descargar dossier de empresa
       </a>
-      <a class="mqm-xmas mqm-xmas-btn" href="/empresas/cena-de-navidad">
-        <span class="mqm-xmas-dot"></span>¿Tienes cena de Navidad?
-      </a>
     </div>
     <div class="emp-hero__image">
       <img src="images/empresas/hero-empresas.jpg" alt="Manos con cartas en llamas" width="1920" height="2557" />
@@ -277,7 +283,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="qh-card__star">*</span>
           <h3 class="qh-card__title">Cenas de empresa, eventos corporativos y magia de cerca</h3>
           <p class="qh-card__desc">Magia de cerca para sorprender a tus invitados en cenas y eventos corporativos, creando momentos únicos e inolvidables.</p>
-          <span style="display:inline-block;margin-top:12px;color:#C4973D;font-weight:700;font-size:14px">Ver cenas de Navidad &rsaquo;</span>
+        <span style="display:inline-block;margin-top:12px;color:#C4973D;font-weight:700;font-size:14px">Ver cenas de Navidad &rsaquo;</span>
         </div>
       </a>
 
@@ -732,8 +738,8 @@ function submitMqmForm(e, endpoint) {
 </script>
 <script src="/js/cookie-banner.js"></script>
 <script>
-/* Avisos de cenas de Navidad: visibles hasta el 31 de diciembre de 2026.
-   A partir del 1 de enero desaparecen solos, sin tocar nada. */
+/* Banda de cenas de Navidad: visible hasta el 31 de diciembre de 2026.
+   El 1 de enero desaparece sola. Para reactivarla otro año, cambia la fecha. */
 (function () {
   if (new Date() >= new Date('2027-01-01T00:00:00')) return;
   document.addEventListener('DOMContentLoaded', function () {

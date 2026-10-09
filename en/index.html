@@ -193,8 +193,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <script>
 </script>
+<style>
+  /* Banda de cenas de Navidad: fija arriba, solo en ordenador.
+     En movil no aparece porque ahi ya esta el boton de eventos familiares.
+     Se activa por JS y caduca sola el 1 de enero (ver script al final del body). */
+  :root { --xmas-h: 44px; }
+  .mqm-xmas-bar { display: none; }
+  @media (min-width: 769px) {
+    .mqm-xmas-bar.is-on {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: var(--xmas-h);
+      background: linear-gradient(90deg, #8a6425 0%, #c9a84c 50%, #8a6425 100%);
+      color: #15100a; text-decoration: none;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 15px; font-weight: 700; line-height: 1; letter-spacing: .01em;
+    }
+    .mqm-xmas-bar.is-on:hover { filter: brightness(1.07); }
+    .mqm-xmas-bar span { all: unset; }
+    .mqm-xmas-bar .mqm-xmas-sep { opacity: .5; }
+    .mqm-xmas-bar .mqm-xmas-cta { text-decoration: underline; text-underline-offset: 3px; }
+    html.has-xmas .nav { top: var(--xmas-h); }
+  }
+  @media (max-width: 768px) { .mqm-xmas-bar { display: none !important; } }
+</style>
 </head>
 <body>
+<a class="mqm-xmas mqm-xmas-bar" href="/empresas/cena-de-navidad"><span>Christmas company dinners 2026</span><span class="mqm-xmas-sep">&middot;</span><span class="mqm-xmas-cta">Check availability &rsaquo;</span></a>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THR68GGS"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -533,6 +557,17 @@ function submitMqmForm(e, endpoint) {
   });
   return false;
 }
+</script>
+<script>
+/* Banda de cenas de Navidad: visible hasta el 31 de diciembre de 2026.
+   El 1 de enero desaparece sola. Para reactivarla otro año, cambia la fecha. */
+(function () {
+  if (new Date() >= new Date('2027-01-01T00:00:00')) return;
+  document.addEventListener('DOMContentLoaded', function () {
+    document.documentElement.classList.add('has-xmas');
+    document.querySelectorAll('.mqm-xmas').forEach(function (el) { el.classList.add('is-on'); });
+  });
+})();
 </script>
 </body>
 </html>
