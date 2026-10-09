@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.masquemagos.com/</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.masquemagos.com/" />
     <xhtml:link rel="alternate" hreflang="cat" href="https://www.masquemagos.com/cat/" />
@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://www.masquemagos.com/empresas</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.masquemagos.com/empresas" />
     <xhtml:link rel="alternate" hreflang="cat" href="https://www.masquemagos.com/cat/empresas" />
@@ -538,7 +538,7 @@
   </url>
   <url>
     <loc>https://www.masquemagos.com/empresas/cena-de-navidad</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
