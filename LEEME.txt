@@ -1,0 +1,35 @@
+WEB SIN LOGOS, SIN CASOS Y SIN CIFRAS DE EXPERIENCIA
+====================================================
+
+Sube estos archivos a su misma ruta, respetando las carpetas del zip.
+Son 35 paginas de las 113 que tiene la web; el resto no hacia falta tocarlo.
+
+QUE SE HA QUITADO
+-----------------
+· Los 19 logos de clientes de empresas (es/cat/en) y los 6 de la cena de Navidad.
+· La seccion entera de "Casos reales" en las tres paginas de empresas.
+· Las menciones a Disney, Honda y SEAT dentro de 6 articulos del blog
+  (se mantiene la idea, sin nombrar marcas).
+· 40 años de trayectoria, +500 ayuntamientos, +2000 celebraciones,
+  +3570 eventos familiares, +1000 cenas de empresa.
+· "Magos en cada provincia de España".
+
+QUE SE HA QUEDADO
+-----------------
+· Los tres testimonios de empresa.
+· La guia gratuita y las preguntas frecuentes de la pagina de empresas.
+· La escuela de magia propia (eso sigue siendo tuyo).
+· "Trabajamos en toda España": es voluntad de desplazarte, no plantilla.
+
+QUE HA CAMBIADO
+---------------
+· Las 24 horas de respuesta pasan a 48 en toda la web (37 sitios).
+· Las barras de datos de celebraciones y bodas pasan de 4 a 3 casillas:
+  48h respuesta · toda España · a medida.
+
+PENDIENTE, NO LO PUEDO HACER YO
+-------------------------------
+El boton "Descargar dossier de empresa" del hero de empresas sigue
+llevando al dossier de Canva, y ese dossier tiene dentro justo lo que
+acabamos de quitar: los logos y los casos. Hay que actualizarlo en Canva
+o quitar el boton. Dime cual de las dos y lo hago.
