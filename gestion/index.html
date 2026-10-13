@@ -147,9 +147,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="box">
     <h1>Más que Magos</h1>
     <p>Panel de gestión — acceso privado</p>
-    <input type="password" id="gate-pass" placeholder="Contraseña" />
-    <button onclick="checkPass()">Entrar</button>
-    <p class="err" id="gate-err">Contraseña incorrecta</p>
+    <input type="email" id="gate-email" placeholder="Tu correo" autocomplete="username" />
+    <input type="password" id="gate-pass" placeholder="Contraseña" autocomplete="current-password" />
+    <button id="gate-btn" onclick="entrar()">Entrar</button>
+    <p class="err" id="gate-err">Correo o contraseña incorrectos</p>
   </div>
 </div>
 
@@ -176,9 +177,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 // ============================================================
-// CONFIG — cambia la contraseña antes de subir esto a producción
+// CONFIG
 // ============================================================
-const APP_PASSWORD = "MasQueMagos2026";
+// Aqui ya NO hay ninguna contraseña escrita. Cada persona entra con su
+// propio correo y su contraseña, que viven en Supabase (Authentication).
+// Para dar acceso a alguien: Supabase > Authentication > Users > Add user.
+// Para quitarselo: borra ese usuario alli. No hay que tocar este archivo.
 const SUPABASE_URL = "https://hugeeqoyarnvpnkjnvvl.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1Z2VlcW95YXJudnBua2pudnZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MjU1NTMsImV4cCI6MjA5OTIwMTU1M30.FD2urxcWXHXjZnu-guc_7wmzV8TYcMlnvkGQFqru_NU";
 
@@ -188,26 +192,65 @@ if(typeof supabase === 'undefined'){
 }
 const sb = typeof supabase !== 'undefined' ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-function logout(){
-  localStorage.removeItem('mqm_auth');
+// Resto de la sesion vieja, de cuando la contraseña estaba escrita aqui.
+// Se borra sola la primera vez que alguien abre esta version.
+localStorage.removeItem('mqm_auth');
+
+function error(msg){
+  const e = document.getElementById('gate-err');
+  e.textContent = msg;
+  e.style.display = 'block';
+}
+
+async function logout(){
+  if(sb) await sb.auth.signOut();
   location.reload();
 }
-function checkPass(){
-  const val = document.getElementById('gate-pass').value;
-  if(val === APP_PASSWORD){
-    localStorage.setItem('mqm_auth','1');
-    document.getElementById('gate').style.display='none';
-    document.getElementById('app').style.display='block';
-    boot();
-  } else {
-    document.getElementById('gate-err').style.display='block';
-  }
+
+function abrirPanel(){
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  boot();
 }
-document.getElementById('gate-pass').addEventListener('keydown', e => { if(e.key==='Enter') checkPass(); });
-if(localStorage.getItem('mqm_auth')==='1'){
-  document.getElementById('gate').style.display='none';
-  document.getElementById('app').style.display='block';
-  window.addEventListener('DOMContentLoaded', boot);
+
+async function entrar(){
+  if(!sb) return;
+  const email = document.getElementById('gate-email').value.trim();
+  const pass  = document.getElementById('gate-pass').value;
+  const btn   = document.getElementById('gate-btn');
+  if(!email || !pass){ return error('Escribe tu correo y tu contraseña.'); }
+
+  btn.disabled = true; btn.textContent = 'Entrando…';
+  const { error: err } = await sb.auth.signInWithPassword({ email, password: pass });
+  btn.disabled = false; btn.textContent = 'Entrar';
+
+  if(err){
+    const m = (err.message || '').toLowerCase();
+    if(m.includes('invalid login')) return error('Correo o contraseña incorrectos.');
+    if(m.includes('email not confirmed')) return error('Ese correo esta sin confirmar. Confirmalo en Supabase > Authentication > Users.');
+    if(m.includes('failed to fetch')) return error('Sin conexion. Revisa internet y vuelve a probar.');
+    return error('No se ha podido entrar: ' + err.message);
+  }
+  document.getElementById('gate-err').style.display = 'none';
+  document.getElementById('gate-pass').value = '';
+  abrirPanel();
+}
+
+['gate-email','gate-pass'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => { if(e.key === 'Enter') entrar(); });
+});
+
+// Si ya habia sesion abierta, entra directo. Supabase la caduca y la renueva sola.
+if(sb){
+  sb.auth.getSession().then(({ data }) => {
+    if(!data.session) return;
+    if(document.readyState === 'loading') window.addEventListener('DOMContentLoaded', abrirPanel);
+    else abrirPanel();
+  });
+  // Si la sesion caduca o se cierra desde otra pestaña, vuelve a pedir el acceso.
+  sb.auth.onAuthStateChange((evt) => {
+    if(evt === 'SIGNED_OUT') location.reload();
+  });
 }
 
 function toast(msg){
