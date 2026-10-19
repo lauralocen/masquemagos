@@ -33,7 +33,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "EntertainmentBusiness", "name": "Más que Magos", "url": "https://www.masquemagos.com/celebraciones/", "telephone": "+34616094587", "email": "masqmagos@gmail.com", "areaServed": [{"@type": "City", "name": "Barcelona"}, {"@type": "City", "name": "Madrid"}], "makesOffer": [{"@type": "Offer", "name": "Cumpleaños infantil", "price": "200", "priceCurrency": "EUR", "url": "https://www.masquemagos.com/celebraciones/cumpleanos-infantiles"}, {"@type": "Offer", "name": "Comuniones", "price": "300", "priceCurrency": "EUR", "url": "https://www.masquemagos.com/celebraciones/comuniones"}, {"@type": "Offer", "name": "Bautizos", "price": "300", "priceCurrency": "EUR", "url": "https://www.masquemagos.com/celebraciones/bautizos"}, {"@type": "Offer", "name": "Cumpleaños adultos", "price": "200", "priceCurrency": "EUR", "url": "https://www.masquemagos.com/celebraciones/cumpleanos-adultos"}, {"@type": "Offer", "name": "Bodas", "price": "350", "priceCurrency": "EUR", "url": "https://www.masquemagos.com/celebraciones/bodas"}, {"@type": "Offer", "name": "Despedidas", "price": "280", "priceCurrency": "EUR", "url": "https://www.masquemagos.com/celebraciones/despedidas"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=Fraunces:ital,wght@0,300;0,700;1,300;1,400;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root{--bg:#FBF6EE;--card:#fff;--ink:#2B2118;--muted:#76685A;--terra:#C2502E;--terra-dk:#A8401F;--terra2:#F6E1D6;--olive:#4E5B3A;--olive2:#E4E8D8;--line:#EADFD0;--wa:#1E8E4E}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -43,35 +43,53 @@ img{display:block;max-width:100%}
 a{color:inherit}
 .w{max-width:1180px;margin:0 auto;padding-left:40px;padding-right:40px}
 h1,h2,h3,.serif{font-family:'Young Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em}
-#precios,#magos,#como,#opiniones,#contacto{scroll-margin-top:90px}
+#precios,#magos,#como,#opiniones,#contacto{scroll-margin-top:80px}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:300;background:rgba(251,246,238,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
-nav.scrolled{border-bottom-color:var(--line)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
-.logo{font-family:'Young Serif',serif;font-size:25px;text-decoration:none;white-space:nowrap}.logo span{color:var(--terra)}
-.links{display:flex;gap:26px;font-weight:500;font-size:15px}.links a{text-decoration:none}.links a:hover{color:var(--terra)}
-.lang{font-size:12.5px;color:var(--muted);letter-spacing:.06em}.lang a{text-decoration:none}.lang b{color:var(--ink)}
+/* CABECERA (diseño original) */
+.oh-nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(255,248,238,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(44,31,14,.1);padding:12px 20px;padding-top:max(12px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s;font-family:'DM Sans',sans-serif}
+.oh-nav.scrolled{box-shadow:0 4px 20px rgba(44,31,14,.1)}
+.oh-logo{height:36px;width:auto}
+.oh-logo-block{display:flex;flex-direction:column;gap:2px}
+.oh-menu{display:none;gap:28px;align-items:center;font-size:13.5px;font-weight:500}
+.oh-menu a{color:#1A1005;text-decoration:none}.oh-menu a:hover{color:#8a6425}
+.oh-right{display:flex;align-items:center;gap:10px}
+.oh-wa{display:flex;align-items:center;gap:6px;padding:10px 16px;background:#158038;color:#fff;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none}
+.oh-wa svg{width:15px;height:15px}
+.oh-presup{padding:10px 16px;background:#8a6425;color:#fff;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;white-space:nowrap}
+.oh-ham{display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:none;border:1px solid rgba(44,31,14,.1);border-radius:10px;cursor:pointer;flex-shrink:0;color:#1A1005}
+.oh-panel{display:none;position:fixed;top:64px;left:12px;right:12px;z-index:299;background:#fff;border:1px solid rgba(44,31,14,.1);border-radius:16px;box-shadow:0 8px 30px rgba(44,31,14,.15);padding:8px;font-family:'DM Sans',sans-serif}
+.oh-panel a{display:block;padding:14px 16px;color:#1A1005;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(44,31,14,.1)}.oh-panel a:last-child{border-bottom:none}
+.oh-hero{position:relative;overflow:hidden;padding-top:calc(62px + env(safe-area-inset-top));background:#FFF8EE;font-family:'DM Sans',sans-serif}
+.oh-img{width:100%;height:72vw;min-height:260px;max-height:400px;overflow:hidden;position:relative}
+.oh-img img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.75) saturate(.85)}
+.oh-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,248,238,0) 35%,#FFF8EE 100%),linear-gradient(90deg,rgba(26,16,5,.4) 0%,transparent 65%)}
+.oh-text{padding:20px 20px 36px}
+.oh-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(196,151,61,.12);color:#8a6425;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border-radius:100px;margin-bottom:16px}
+.oh-h1{font-family:'Fraunces',serif;font-size:clamp(32px,8.5vw,50px);font-weight:700;line-height:1.06;margin-bottom:24px;letter-spacing:-.01em;color:#1A1005}
+.oh-h1 em{font-style:italic;color:#8a6425}
+.oh-claim{font-family:'Fraunces',serif;font-size:clamp(18px,2.6vw,23px);line-height:1.35;color:#1A1005;font-weight:700;margin:-8px 0 20px;padding-left:16px;border-left:3px solid #8a6425}
+.oh-claim span{display:block;color:#8a6425;font-style:italic;font-weight:400}
+.oh-sub{font-size:17px;color:#6B5640;line-height:1.7;margin-bottom:28px}
+.oh-sub strong{color:#1A1005;font-weight:600}
+.oh-box{background:#8a6425;border-radius:16px;padding:28px 32px;max-width:480px;text-align:center;margin-top:24px}
+.oh-box-t{font-family:'Fraunces',serif;font-size:clamp(15px,2vw,19px);color:#fff;font-style:italic;margin:0 0 16px;line-height:1.55;font-weight:300}
+.oh-box-b{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.oh-btn1,.oh-btn2{display:inline-block;padding:11px 26px;border-radius:100px;font-size:13.5px;font-weight:600;text-decoration:none}
+.oh-btn1{background:#fff;color:#8a6425}.oh-btn2{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+.oh-box-n{font-size:12.5px;color:rgba(255,255,255,.85);margin-top:14px}
+@media(max-width:520px){.oh-wa span{display:none}.oh-wa{padding:10px 12px}}
+@media(min-width:640px){
+  .oh-hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;align-items:center;padding-top:0}
+  .oh-img{height:100%;max-height:none;order:2}
+  .oh-text{padding:120px 48px 80px;order:1}
+  .oh-grad{background:linear-gradient(90deg,#FFF8EE 0%,transparent 30%),linear-gradient(180deg,transparent 65%,#FFF8EE 100%)}
+}
+@media(min-width:1024px){.oh-menu{display:flex}.oh-ham{display:none}.oh-text{padding:120px 80px 80px}}
 .b{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 26px;border-radius:100px;font-weight:600;text-decoration:none;font-size:15px;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
 .b svg{width:18px;height:18px}
 .b1{background:var(--terra);color:#fff}.b1:hover{background:var(--terra-dk)}
 .b2{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
 .bwa{background:var(--wa);color:#fff}
-.nav-cta{padding:12px 20px;font-size:14.5px}
-
-/* HERO */
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;padding-top:40px;padding-bottom:70px}
-.pill{display:inline-block;background:var(--olive2);color:var(--olive);font-weight:600;font-size:13px;padding:7px 14px;border-radius:100px}
-.hero h1{font-size:64px;line-height:1.04;margin:22px 0}.hero h1 span{color:var(--terra)}
-.hero p.lead{font-size:19px;color:var(--muted);max-width:500px}
-.cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-.fast{display:flex;align-items:center;gap:10px;margin-top:20px;font-size:14.5px;color:var(--ink);font-weight:500}
-.fast i{width:9px;height:9px;border-radius:50%;background:#2FA463;box-shadow:0 0 0 4px rgba(47,164,99,.18)}
-.collage{position:relative;height:540px}
-.collage img{position:absolute;object-fit:cover;border-radius:28px;box-shadow:0 20px 50px rgba(43,33,24,.18)}
-.c1{left:0;top:30px;width:58%;height:390px}.c2{right:0;top:0;width:38%;height:240px}.c3{right:6%;bottom:0;width:46%;height:270px}
-.badge{position:absolute;left:6%;bottom:24px;background:var(--card);border-radius:20px;padding:16px 20px;box-shadow:0 12px 30px rgba(43,33,24,.14);font-size:14px;line-height:1.35}
-.badge b{display:block;font-family:'Young Serif',serif;font-weight:400;font-size:24px;color:var(--terra)}
 
 /* DATOS */
 .facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -158,20 +176,13 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.reveal.in{opacity:1;transform:none}
 
 @media(max-width:900px){
-  .links{display:none}
-  .hero,.duo,.steps,.qs,.contact{grid-template-columns:1fr}
+  .duo,.steps,.qs,.contact{grid-template-columns:1fr}
   .tiles{grid-template-columns:1fr 1fr}
   .facts .w{grid-template-columns:1fr 1fr}
   .fact:nth-child(3){border-left:none;padding-left:0}
 }
 @media(max-width:640px){
   .w{padding-left:20px;padding-right:20px}
-  .nav-in{height:66px}.logo{font-size:21px}.lang{display:none}.nav-cta{padding:10px 16px;font-size:13.5px}
-  .hero{padding-top:12px;gap:22px;padding-bottom:44px}
-  .collage{height:340px;order:-1}.c1{height:250px;top:20px}.c2{height:150px}.c3{height:170px}
-  .badge{left:0;bottom:6px;padding:12px 16px}.badge b{font-size:20px}
-  .hero h1{font-size:42px}.hero p.lead{font-size:17px}
-  .cta{flex-direction:column}.cta .b{width:100%}
   .fact{padding:18px 0 18px 16px}.fact b{font-size:20px}
   .sec{padding-top:64px;padding-bottom:64px}.sh h2{font-size:34px}
   .tiles{grid-template-columns:1fr}.tile{height:340px}
@@ -185,29 +196,41 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THR68GGS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<nav id="nav"><div class="w nav-in">
-  <a class="logo" href="https://www.masquemagos.com">Más que <span>Magos</span></a>
-  <div class="links"><a href="#precios">Precios</a><a href="#magos">Magos y animadores</a><a href="#como">Cómo funciona</a><a href="#opiniones">Opiniones</a></div>
-  <span class="lang"><b>ES</b> · <a href="https://www.masquemagos.com/cat/celebraciones/">CAT</a> · <a href="https://www.masquemagos.com/en/celebraciones/">EN</a></span>
-  <a class="b b1 nav-cta" href="#contacto">Reserva tu mago</a>
-</div></nav>
+<nav id="nav" class="oh-nav">
+  <div class="oh-logo-block">
+    <a href="https://www.masquemagos.com"><img src="/images/celebraciones/img-df00a5e99172.png" class="oh-logo" alt="Más que Magos" width="300" height="143" /></a>
+    <span style="display:flex;gap:6px;align-items:center;margin-top:4px">
+<a href="https://www.masquemagos.com/celebraciones/" title="Español" style="opacity:1;line-height:0;display:inline-block"><svg width="18" height="13" viewBox="0 0 20 14"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg></a>
+<a href="https://www.masquemagos.com/cat/celebraciones/" title="Català" style="opacity:0.5;line-height:0;display:inline-block"><svg width="18" height="13" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FCDD09"/><rect y="1.4" width="20" height="1.4" fill="#DA121A"/><rect y="4.2" width="20" height="1.4" fill="#DA121A"/><rect y="7" width="20" height="1.4" fill="#DA121A"/><rect y="9.8" width="20" height="1.4" fill="#DA121A"/><rect y="12.6" width="20" height="1.4" fill="#DA121A"/></svg></a>
+<a href="https://www.masquemagos.com/en/celebraciones/" title="English" style="opacity:0.5;line-height:0;display:inline-block"><svg width="18" height="13" viewBox="0 0 60 30"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L27,13.5 M60,0 L33,13.5 M0,30 L27,16.5 M60,30 L33,16.5" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg></a>
+</span>
+  </div>
+  <div class="oh-menu"><a href="#precios">Precios</a><a href="#magos">Magos y animadores</a><a href="#como">Cómo funciona</a><a href="#opiniones">Opiniones</a></div>
+  <div class="oh-right">
+    <a class="oh-wa" href="https://wa.me/34616094587?text=Hola%21%20Quiero%20reservar%20un%20mago%20para%20mi%20celebraci%C3%B3n.%0A%0ATipo%20de%20celebraci%C3%B3n%3A%20%0AFecha%3A%20%0ALocalidad%3A%20" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp</span></a>
+    <a class="oh-presup" href="#contacto">Reserva tu mago</a>
+    <button class="oh-ham" onclick="toggleMobileMenu()" aria-label="Menú"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
+</nav>
+<div id="mobile-menu-panel" class="oh-panel"><a href="#precios" onclick="closeMobileMenu()">Precios</a><a href="#magos" onclick="closeMobileMenu()">Magos y animadores</a><a href="#como" onclick="closeMobileMenu()">Cómo funciona</a><a href="#opiniones" onclick="closeMobileMenu()">Opiniones</a></div>
+
 
 <main>
-<section class="w hero">
-  <div>
-    <span class="pill">Magos y animadores · Barcelona y Madrid</span>
-    <h1>Una fiesta que <span>nadie olvida</span></h1>
-    <p class="lead">Magos y animadores para cumpleaños, comuniones, bautizos, bodas y eventos de empresa en Barcelona y Madrid. Con precio cerrado desde el primer mensaje.</p>
-    <div class="cta"><a class="b b1" href="#precios">Ver precios</a><a class="b b2" href="#contacto">Reserva tu mago</a></div>
-    <p class="fast"><i></i>Te contestamos la disponibilidad en menos de 1 hora</p>
-  </div>
-  <div class="collage">
-    <img class="c1" src="/images/celebraciones/img-dcd1a6cb079e.jpg" alt="Niño vestido de mago en su cumpleaños" style="object-position:center 20%" fetchpriority="high"/>
-    <img class="c2" src="/images/bodas/boda-copa.jpg" alt="Magia de cerca en una boda" style="object-position:center 30%"/>
-    <img class="c3" src="/images/ayuntamientos/filosofia-ayuntamientos.jpg" alt="Mago con chistera en una celebración" style="object-position:60% 40%"/>
-    <div class="badge"><b>1 hora</b>para confirmarte disponibilidad</div>
+<section class="oh-hero">
+  <div class="oh-img"><img src="/images/celebraciones/img-12f5c6a8f642.jpg" alt="Mago profesional para celebraciones" width="1400" height="933" fetchpriority="high"/><div class="oh-grad"></div></div>
+  <div class="oh-text">
+    <span class="oh-tag">✨ Magia para celebraciones</span>
+    <h1 class="oh-h1">Haz que todos recuerden <em>este día</em> para siempre</h1>
+    <p class="oh-claim">El día no se repite.<span>Nosotros no fallamos.</span></p>
+    <p class="oh-sub">Magos y animadores para <strong>bautizos, comuniones, bodas, cumpleaños y celebraciones</strong> en Barcelona y Madrid.<br><br>Detrás de cada evento hay <strong>una escuela de magia propia</strong>. Para que el día que llevas meses preparando <strong>salga bien</strong>.</p>
+    <div class="oh-box">
+      <p class="oh-box-t">Precio cerrado desde el primer mensaje.<br>Elige tu celebración y reserva tu mago.</p>
+      <div class="oh-box-b"><a href="#precios" class="oh-btn1">Ver precios</a><a href="#contacto" class="oh-btn2">Reserva tu mago</a></div>
+      <p class="oh-box-n">Te contestamos la disponibilidad en menos de 1 hora</p>
+    </div>
   </div>
 </section>
+
 
 <section class="facts"><div class="w">
   <div class="fact"><b>Precio cerrado</b><span>Sin sorpresas al final</span></div>
@@ -336,6 +359,8 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
     setTimeout(revealAll,2500);
   } else revealAll();
 
+  function toggleMobileMenu(){var p=document.getElementById('mobile-menu-panel');p.style.display=p.style.display==='block'?'none':'block';}
+  function closeMobileMenu(){document.getElementById('mobile-menu-panel').style.display='none';}
   function submitForm(){
     var name=document.getElementById('f-name').value.trim();
     var phone=document.getElementById('f-phone').value.trim();
