@@ -43,16 +43,18 @@ h1,h2,h3,.serif{font-family:'Young Serif',Georgia,serif;font-weight:400;letter-s
 #precios,#magos,#animadores,#como,#opiniones,#contacto{scroll-margin-top:80px}
 
 /* CABECERA (diseño original) */
-.oh-nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(255,248,238,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(44,31,14,.1);padding:12px 20px;padding-top:max(12px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s;font-family:'DM Sans',sans-serif}
+.oh-nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(255,248,238,.92);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border-bottom:1px solid rgba(138,100,37,.14);padding:10px 28px;padding-top:max(12px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s;font-family:'DM Sans',sans-serif}
 .oh-nav.scrolled{box-shadow:0 4px 20px rgba(44,31,14,.1)}
-.oh-logo{height:36px;width:auto}
-.oh-logo-block{display:flex;flex-direction:column;gap:2px}
-.oh-menu{display:none;gap:28px;align-items:center;font-size:13.5px;font-weight:500}
-.oh-menu a{color:#1A1005;text-decoration:none}.oh-menu a:hover{color:#8a6425}
+.oh-logo{height:40px;width:auto;display:block}
+.oh-logo-block{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.oh-logo-block > span{opacity:.85;transform:scale(.85);transform-origin:left center}
+.oh-menu{display:none;gap:6px;align-items:center;font-size:14.5px;font-weight:500;background:rgba(255,255,255,.6);border:1px solid rgba(138,100,37,.14);border-radius:100px;padding:5px}
+.oh-menu a{color:#3D2C14;text-decoration:none;padding:9px 16px;border-radius:100px;transition:background .2s,color .2s;white-space:nowrap}.oh-menu a:hover{background:#F3E6D2;color:#8a6425}
+.oh-menu a.oh-back{color:#8a6425;font-weight:600}.oh-menu a.oh-back::before{content:'← ';}
 .oh-right{display:flex;align-items:center;gap:10px}
-.oh-wa{display:flex;align-items:center;gap:6px;padding:10px 16px;background:#158038;color:#fff;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none}
+.oh-wa{display:flex;align-items:center;gap:7px;height:42px;padding:0 18px;background:#158038;color:#fff;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 4px 14px rgba(21,128,56,.22)}
 .oh-wa svg{width:15px;height:15px}
-.oh-presup{padding:10px 16px;background:#8a6425;color:#fff;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;white-space:nowrap}
+.oh-presup{display:flex;align-items:center;height:42px;padding:0 20px;background:#8a6425;color:#fff;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;box-shadow:0 4px 14px rgba(138,100,37,.25)}.oh-presup:hover{background:#a87e30}
 .oh-ham{display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:none;border:1px solid rgba(44,31,14,.1);border-radius:10px;cursor:pointer;flex-shrink:0;color:#1A1005}
 .oh-panel{display:none;position:fixed;top:64px;left:12px;right:12px;z-index:299;background:#fff;border:1px solid rgba(44,31,14,.1);border-radius:16px;box-shadow:0 8px 30px rgba(44,31,14,.15);padding:8px;font-family:'DM Sans',sans-serif}
 .oh-panel a{display:block;padding:14px 16px;color:#1A1005;text-decoration:none;font-weight:500;border-bottom:1px solid rgba(44,31,14,.1)}.oh-panel a:last-child{border-bottom:none}
@@ -81,7 +83,8 @@ h1,h2,h3,.serif{font-family:'Young Serif',Georgia,serif;font-weight:400;letter-s
 .oh-btn1{background:#fff;color:#8a6425}.oh-btn2{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
 .oh-box-n{font-size:12.5px;color:rgba(255,255,255,.85);margin-top:14px}
 @media(max-width:520px){.oh-wa span{display:none}.oh-wa{padding:10px 12px}}
-@media(max-width:400px){.oh-presup{padding:9px 12px;font-size:12px}.oh-logo{height:30px}}
+@media(max-width:640px){.oh-nav{padding:8px 14px}.oh-logo{height:34px}.oh-wa,.oh-presup{height:38px}}
+@media(max-width:400px){.oh-presup{padding:0 12px;font-size:12px}.oh-logo{height:30px}}
 @media(min-width:640px){
   .oh-hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;align-items:center;padding-top:0}
   .oh-img{height:100%;max-height:none;order:2}
@@ -286,16 +289,15 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
 <nav id="nav" class="oh-nav">
   <div class="oh-logo-block">
     <a href="/celebraciones/"><img src="/images/celebraciones/img-df00a5e99172.png" class="oh-logo" alt="Más que Magos" width="300" height="143" /></a>
-    <a href="/celebraciones/" class="back">← Celebraciones</a>
   </div>
-  <div class="oh-menu"><a href="#precio">Precio</a><a href="#como-va">Cómo va el día</a><a href="#preguntas">Preguntas</a><a href="/celebraciones/">Otras celebraciones</a></div>
+  <div class="oh-menu"><a class="oh-back" href="/celebraciones/">Celebraciones</a><a href="#precio">Precio</a><a href="#como-va">Cómo va el día</a><a href="#preguntas">Preguntas</a></div>
   <div class="oh-right">
     <a class="oh-wa" href="https://wa.me/34616094587?text=Hola%21%20Queremos%20informaci%C3%B3n%20para%20nuestra%20boda.%0A%0AFecha%3A%20%0AFinca%20o%20lugar%3A%20%0AN%C3%BAmero%20de%20invitados%3A%20" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp</span></a>
     <a class="oh-presup" href="#contacto">Consultar disponibilidad</a>
     <button class="oh-ham" onclick="toggleMobileMenu()" aria-label="Menú"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   </div>
 </nav>
-<div id="mobile-menu-panel" class="oh-panel"><a href="#precio" onclick="closeMobileMenu()">Precio</a><a href="#como-va" onclick="closeMobileMenu()">Cómo va el día</a><a href="#preguntas" onclick="closeMobileMenu()">Preguntas</a><a href="/celebraciones/" onclick="closeMobileMenu()">Otras celebraciones</a><a href="/celebraciones/" onclick="closeMobileMenu()">Todas las celebraciones</a></div>
+<div id="mobile-menu-panel" class="oh-panel"><a href="#precio" onclick="closeMobileMenu()">Precio</a><a href="#como-va" onclick="closeMobileMenu()">Cómo va el día</a><a href="#preguntas" onclick="closeMobileMenu()">Preguntas</a><a href="/celebraciones/" onclick="closeMobileMenu()">Todas las celebraciones</a></div>
 
 <main>
 <section class="oh-hero">
