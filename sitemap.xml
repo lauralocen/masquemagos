@@ -653,7 +653,32 @@
   </url>
   <url>
     <loc>https://www.masquemagos.com/celebraciones/bodas</loc>
-    <lastmod>2026-10-02</lastmod>
+    <lastmod>2026-10-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/celebraciones/cumpleanos-infantiles</loc>
+    <lastmod>2026-10-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/celebraciones/bautizos</loc>
+    <lastmod>2026-10-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/celebraciones/comuniones</loc>
+    <lastmod>2026-10-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/celebraciones/cumpleanos-adultos</loc>
+    <lastmod>2026-10-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/celebraciones/despedidas</loc>
+    <lastmod>2026-10-19</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
