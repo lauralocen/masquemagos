@@ -95,12 +95,14 @@ h1,h2,h3,.serif{font-family:'Young Serif',Georgia,serif;font-weight:400;letter-s
 .b2{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
 .bwa{background:var(--wa);color:#fff}
 
-/* DATOS */
-.facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.facts .w{display:grid;grid-template-columns:repeat(4,1fr)}
-.fact{padding:26px 0 26px 26px;border-left:1px solid var(--line)}.fact:first-child{border-left:none;padding-left:0}
-.fact b{display:block;font-family:'Young Serif',serif;font-weight:400;font-size:25px;line-height:1.2}
-.fact span{color:var(--muted);font-size:14.5px}
+/* DATOS (barra flotante) */
+.facts{position:relative;z-index:5;margin-top:-64px}
+.facts .w{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-radius:24px;box-shadow:0 14px 40px rgba(43,33,24,.13);padding-left:0;padding-right:0;max-width:1100px}
+.fact{padding:24px 22px;border-left:1px solid var(--line);text-align:center}.fact:first-child{border-left:none}
+.fact svg{width:26px;height:26px;color:#8a6425;margin:0 auto 8px;display:block}
+.fact b{display:block;font-family:'Young Serif',serif;font-weight:400;font-size:20px;line-height:1.25}
+.fact span{display:block;color:var(--muted);font-size:13.5px;line-height:1.4;margin-top:2px}
+
 
 /* SECCIONES */
 .sec{padding-top:90px;padding-bottom:90px}
@@ -219,12 +221,12 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
   .duo,.steps,.qs,.contact{grid-template-columns:1fr}
   .tiles{grid-template-columns:1fr 1fr}
   .acards,.tiles-4{grid-template-columns:1fr 1fr}
-  .facts .w{grid-template-columns:1fr 1fr}
-  .fact:nth-child(3){border-left:none;padding-left:0}
+  .facts .w{grid-template-columns:1fr 1fr;margin-left:20px;margin-right:20px}
+  .fact{border-left:none;border-top:1px solid var(--line)}.fact:nth-child(-n+2){border-top:none}.fact:nth-child(even){border-left:1px solid var(--line)}
 }
 @media(max-width:640px){
   .w{padding-left:20px;padding-right:20px}
-  .fact{padding:18px 0 18px 16px}.fact b{font-size:20px}
+  .facts{margin-top:-36px}.fact{padding:16px 10px}.fact b{font-size:16px}.fact span{font-size:12.5px}.fact svg{width:22px;height:22px;margin-bottom:6px}
   .sec{padding-top:64px;padding-bottom:64px}.sh h2{font-size:34px}
   .tiles,.tiles-4{grid-template-columns:1fr 1fr;gap:10px}.tile,.tiles-4 .tile{height:170px;border-radius:18px}
   .tile-desc,.tile-more{display:none}.tile-name{font-size:17px}.tile-in{left:12px;right:10px;bottom:10px}
@@ -308,10 +310,10 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
 </section>
 
 <section class="facts"><div class="w">
-  <div class="fact"><b>300 €</b><span>Precio cerrado</span></div>
-  <div class="fact"><b>1 hora</b><span>Para confirmarte disponibilidad</span></div>
-  <div class="fact"><b>Para todos</b><span>Niños y mayores</span></div>
-  <div class="fact"><b>BCN · MAD</b><span>Barcelona, Madrid y alrededores</span></div>
+  <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg><b>300 €</b><span>Precio cerrado</span></div>
+  <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Respuesta en 1 hora</b><span>Por WhatsApp o por teléfono</span></div>
+  <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.3 6L12 16.4 6.6 19.4l1.3-6L3.4 9.3l6-.7z"/></svg><b>Para todos</b><span>Niños y mayores</span></div>
+  <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><b>BCN · MAD</b><span>Barcelona, Madrid y alrededores</span></div>
 </div></section>
 
 <section class="w sec" id="precio">
