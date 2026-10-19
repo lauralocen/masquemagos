@@ -71,6 +71,11 @@ h1,h2,h3,.serif{font-family:'Young Serif',Georgia,serif;font-weight:400;letter-s
 .oh-claim span{display:block;color:#8a6425;font-style:italic;font-weight:400}
 .oh-sub{font-size:17px;color:#6B5640;line-height:1.7;margin-bottom:28px}
 .oh-sub strong{color:#1A1005;font-weight:600}
+.oh-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.oh-c1,.oh-c2{display:inline-flex;align-items:center;justify-content:center;padding:16px 28px;border-radius:100px;font-size:15.5px;font-weight:600;text-decoration:none;font-family:'DM Sans',sans-serif}
+.oh-c1{background:#8a6425;color:#fff}.oh-c1:hover{background:#a87e30}
+.oh-c2{background:#fff;color:#8a6425;box-shadow:inset 0 0 0 1.5px #8a6425}
+@media(max-width:640px){.oh-ctas{flex-direction:column}.oh-c1,.oh-c2{width:100%}}
 .oh-box{background:#8a6425;border-radius:16px;padding:28px 32px;max-width:480px;text-align:center;margin-top:24px}
 .oh-box-t{font-family:'Fraunces',serif;font-size:clamp(15px,2vw,19px);color:#fff;font-style:italic;margin:0 0 16px;line-height:1.55;font-weight:300}
 .oh-box-b{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
@@ -263,12 +268,8 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
     <span class="oh-tag">✨ Magia para celebraciones</span>
     <h1 class="oh-h1">La parte de la fiesta <em>que todos recordarán</em></h1>
     <p class="oh-claim">Tú pones la fecha.<span>Nosotros, la magia.</span></p>
-    <p class="oh-sub">Magos y animadores para <strong>bautizos, comuniones, bodas y cumpleaños</strong> en Barcelona y Madrid.<br><br>Con precio cerrado desde el primer mensaje, para que el día que llevas meses preparando <strong>salga bien</strong>.</p>
-    <div class="oh-box">
-      <p class="oh-box-t">Elige tu celebración, mira el precio<br>y reserva tu mago.</p>
-      <div class="oh-box-b"><a href="#precios" class="oh-btn1">Ver precios</a><a href="#contacto" class="oh-btn2">Reserva tu mago</a></div>
-      <p class="oh-box-n">Te contestamos la disponibilidad en menos de 1 hora</p>
-    </div>
+    <p class="oh-sub">Magos y animadores para <strong>bautizos, comuniones, bodas y cumpleaños</strong> en Barcelona y Madrid.</p>
+    <div class="oh-ctas"><a href="#precios" class="oh-c1">Ver precios</a><a href="#contacto" class="oh-c2">Reserva tu mago o animador</a></div>
   </div>
 </section>
 
