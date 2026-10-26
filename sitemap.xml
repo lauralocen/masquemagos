@@ -653,32 +653,7 @@
   </url>
   <url>
     <loc>https://www.masquemagos.com/celebraciones/bodas</loc>
-    <lastmod>2026-10-19</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.masquemagos.com/celebraciones/cumpleanos-infantiles</loc>
-    <lastmod>2026-10-19</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.masquemagos.com/celebraciones/bautizos</loc>
-    <lastmod>2026-10-19</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.masquemagos.com/celebraciones/comuniones</loc>
-    <lastmod>2026-10-19</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.masquemagos.com/celebraciones/cumpleanos-adultos</loc>
-    <lastmod>2026-10-19</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.masquemagos.com/celebraciones/despedidas</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -734,5 +709,29 @@
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/ayuntamientos/blog/magia-carnaval-ayuntamiento</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/cat/ayuntamientos/blog/magia-carnaval-ajuntament</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/en/ayuntamientos/blog/carnival-magic-town-council</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/blog/que-hacer-ninos-comunion</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/cat/blog/que-fer-nens-comunio</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/en/blog/what-to-do-kids-communion</loc>
+    <lastmod>2026-10-16</lastmod>
   </url>
 </urlset>
