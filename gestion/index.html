@@ -325,7 +325,7 @@ const STATUS_STYLES = {
 function badge(style){ return `<span class="badge" style="background:${style.bg};color:${style.text}">${style.label}</span>`; }
 
 let STATE = { clients:[], calls:[], docs:[], gigs:[], expenses:[], magicians:[], bbdd:[], settings:{monthly_goal:0, annual_goal:0}, typeFilter:'todos', statusFilter:'todos', search:'', route:'dashboard' };
-const CCAA = ['Andalucía','Aragón','Asturias','Islas Baleares','Canarias','Cantabria','Castilla-La Mancha','Castilla y León','Cataluña','Extremadura','Galicia','La Rioja','Madrid','Murcia','Navarra','País Vasco','Comunidad Valenciana','Ceuta','Melilla'];
+const CCAA = ['Comunidad de Madrid','Cataluña'];
 let financeMonth = new Date().toISOString().slice(0,7); // YYYY-MM
 let financePct = 20;
 
