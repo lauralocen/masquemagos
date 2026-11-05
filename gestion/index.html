@@ -334,7 +334,8 @@ const NAV_ITEMS = [
   {id:'clientes', label:'Clientes', icon:'👥'},
   {id:'calendario', label:'Calendario', icon:'📅'},
   {id:'bolos', label:'Bolos', icon:'🎩'},
-  {id:'magos', label:'Magos', icon:'🪄'},
+  {id:'magos', label:'Particulares', icon:'🪄'},
+  {id:'empresas', label:'Empresas', icon:'🏢'},
   {id:'llamadas', label:'Llamadas', icon:'📞'},
   {id:'presupuestos', label:'Presupuestos', icon:'📄'},
   {id:'documentos', label:'Documentos', icon:'🗂️'},
@@ -434,6 +435,7 @@ function render(){
   if(STATE.route==='calendario') main.innerHTML = viewCalendario();
   if(STATE.route==='bolos') main.innerHTML = viewBolos();
   if(STATE.route==='magos') main.innerHTML = viewMagos();
+  if(STATE.route==='empresas') main.innerHTML = viewMagos();
   if(STATE.route==='llamadas') main.innerHTML = viewLlamadas();
   if(STATE.route==='presupuestos') main.innerHTML = viewPresupuestos();
   if(STATE.route==='documentos') main.innerHTML = viewDocumentos();
@@ -1076,7 +1078,7 @@ async function addCall(clientId){
 function filterPerformerSelect(prefix){
   const role = document.getElementById(prefix+'-role').value;
   const select = document.getElementById(prefix+'-magician');
-  const matching = STATE.magicians.filter(m=>(m.role||'mago')===role);
+  const matching = STATE.magicians.filter(m=> role==='mago' ? (m.role==='mago'||m.role==='mago_empresa') : (m.role||'mago')===role);
   select.innerHTML = `<option value="">Sin ${role} asignado</option>` + matching.map(m=>`<option value="${m.id}">${m.name}</option>`).join('');
 }
 async function addBolo(clientId){
@@ -2606,8 +2608,9 @@ function magoStats(magoId){
 }
 
 function viewMagos(){
+  const emp = STATE.route==='empresas';
   let filtered = STATE.magicians.filter(m =>
-    (m.role||'mago') === magoRoleTab &&
+    (emp ? m.role==='mago_empresa' : (m.role||'mago') === magoRoleTab) &&
     (magoComunidadFilter==='todas' || m.comunidad===magoComunidadFilter) &&
     m.name.toLowerCase().includes(magoSearch.toLowerCase()) &&
     (!magoOnlyFavorites || m.favorite) &&
@@ -2620,13 +2623,14 @@ function viewMagos(){
 
   return `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <h1 style="font-size:24px">${magoRoleTab==='mago'?'Magos':'Animadores'}</h1>
-      <button class="btn" onclick="openMagoForm()">+ Nuevo ${magoRoleTab==='mago'?'mago':'animador'}</button>
+      <h1 style="font-size:24px">${emp?'Magos de empresas':(magoRoleTab==='mago'?'Magos':'Animadores')}</h1>
+      <button class="btn" onclick="openMagoForm('${emp?'mago_empresa':''}')">+ Nuevo ${emp?'mago de empresas':(magoRoleTab==='mago'?'mago':'animador')}</button>
     </div>
-    <div style="display:flex;gap:8px;margin-bottom:16px">
+    ${emp?'':`    <div style="display:flex;gap:8px;margin-bottom:16px">
       <button class="chip ${magoRoleTab==='mago'?'active':''}" onclick="magoRoleTab='mago'; render()">🪄 Magos (${STATE.magicians.filter(m=>(m.role||'mago')==='mago').length})</button>
       <button class="chip ${magoRoleTab==='animador'?'active':''}" onclick="magoRoleTab='animador'; render()">🎭 Animadores (${STATE.magicians.filter(m=>m.role==='animador').length})</button>
     </div>
+`}
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
       <input type="text" id="mago-search-input" placeholder="Buscar..." value="${magoSearch}" oninput="magoSearch=this.value; render()" style="max-width:240px" />
       <select onchange="magoSortBy=this.value; render()" style="max-width:170px">
@@ -2685,16 +2689,17 @@ function viewMagos(){
   `;
 }
 
-function openMagoForm(){
+function openMagoForm(forceRole){
   const html = `
     <div class="drawer-bg">
       <div class="drawer" onclick="event.stopPropagation()">
-        <h2 style="font-size:21px;margin-bottom:20px">Nuevo ${magoRoleTab==='mago'?'mago':'animador'}</h2>
+        <h2 style="font-size:21px;margin-bottom:20px">Nuevo ${forceRole==='mago_empresa'?'mago de empresas':(magoRoleTab==='mago'?'mago':'animador')}</h2>
         <div style="display:grid;gap:12px">
           <div><label class="f">Nombre</label><input type="text" id="nm-name" /></div>
           <div><label class="f">Tipo</label><select id="nm-role">
-            <option value="mago" ${magoRoleTab==='mago'?'selected':''}>🪄 Mago</option>
-            <option value="animador" ${magoRoleTab==='animador'?'selected':''}>🎭 Animador</option>
+            <option value="mago" ${!forceRole && magoRoleTab==='mago'?'selected':''}>🪄 Mago</option>
+            <option value="animador" ${!forceRole && magoRoleTab==='animador'?'selected':''}>🎭 Animador</option>
+            <option value="mago_empresa" ${forceRole==='mago_empresa'?'selected':''}>🏢 Mago de empresas</option>
           </select></div>
           <div><label class="f">Teléfono</label><input type="tel" id="nm-phone" /></div>
           <div><label class="f">Email</label><input type="email" id="nm-email" /></div>
@@ -2755,6 +2760,7 @@ function openMagoDetail(id){
           <div><label class="f">Tipo</label><select id="mg-role">
             <option value="mago" ${(m.role||'mago')==='mago'?'selected':''}>🪄 Mago</option>
             <option value="animador" ${m.role==='animador'?'selected':''}>🎭 Animador</option>
+            <option value="mago_empresa" ${m.role==='mago_empresa'?'selected':''}>🏢 Mago de empresas</option>
           </select></div>
           <div><label class="f">Teléfono</label><input type="tel" id="mg-phone" value="${m.phone||''}" /></div>
           <div><label class="f">Email</label><input type="email" id="mg-email" value="${m.email||''}" /></div>
