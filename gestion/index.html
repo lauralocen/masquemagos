@@ -334,8 +334,8 @@ const NAV_ITEMS = [
   {id:'clientes', label:'Clientes', icon:'👥'},
   {id:'calendario', label:'Calendario', icon:'📅'},
   {id:'bolos', label:'Bolos', icon:'🎩'},
-  {id:'magos', label:'Particulares', icon:'🪄'},
-  {id:'empresas', label:'Empresas', icon:'🏢'},
+  {id:'magos', label:'Magos fiestas', icon:'🪄'},
+  {id:'empresas', label:'Magos empresas', icon:'🏢'},
   {id:'llamadas', label:'Llamadas', icon:'📞'},
   {id:'presupuestos', label:'Presupuestos', icon:'📄'},
   {id:'documentos', label:'Documentos', icon:'🗂️'},
@@ -2623,8 +2623,8 @@ function viewMagos(){
 
   return `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <h1 style="font-size:24px">${emp?'Magos de empresas':(magoRoleTab==='mago'?'Magos':'Animadores')}</h1>
-      <button class="btn" onclick="openMagoForm('${emp?'mago_empresa':''}')">+ Nuevo ${emp?'mago de empresas':(magoRoleTab==='mago'?'mago':'animador')}</button>
+      <h1 style="font-size:24px">${emp?'Magos empresas':(magoRoleTab==='mago'?'Magos':'Animadores')}</h1>
+      <button class="btn" onclick="openMagoForm('${emp?'mago_empresa':''}')">+ Nuevo ${emp?'mago empresas':(magoRoleTab==='mago'?'mago':'animador')}</button>
     </div>
     ${emp?'':`    <div style="display:flex;gap:8px;margin-bottom:16px">
       <button class="chip ${magoRoleTab==='mago'?'active':''}" onclick="magoRoleTab='mago'; render()">🪄 Magos (${STATE.magicians.filter(m=>(m.role||'mago')==='mago').length})</button>
@@ -2693,7 +2693,7 @@ function openMagoForm(forceRole){
   const html = `
     <div class="drawer-bg">
       <div class="drawer" onclick="event.stopPropagation()">
-        <h2 style="font-size:21px;margin-bottom:20px">Nuevo ${forceRole==='mago_empresa'?'mago de empresas':(magoRoleTab==='mago'?'mago':'animador')}</h2>
+        <h2 style="font-size:21px;margin-bottom:20px">Nuevo ${forceRole==='mago_empresa'?'mago empresas':(magoRoleTab==='mago'?'mago':'animador')}</h2>
         <div style="display:grid;gap:12px">
           <div><label class="f">Nombre</label><input type="text" id="nm-name" /></div>
           <div><label class="f">Tipo</label><select id="nm-role">
