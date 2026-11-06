@@ -782,4 +782,28 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://www.masquemagos.com/cat/blog/mag-per-sopar-nadal-empresa-preu-format</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/cat/blog/magia-aniversari-infantil-casa-o-local</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/cat/blog/magia-festes-majors-ajuntaments</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.masquemagos.com/en/blog/magic-corporate-christmas-dinner-price-format</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
