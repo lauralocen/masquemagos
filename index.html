@@ -219,7 +219,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @media (max-width: 768px) { .mqm-xmas-bar { display: none !important; } }
 </style>
   <style>
-    .evt-nav-pill { border: 1px solid #C4973D; border-radius: 100px; padding: 8px 16px; color: #C4973D !important; white-space: nowrap; }
+    .evt-nav-stack { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .evt-nav-pill { border: 1px solid #C4973D; border-radius: 100px; padding: 6px 14px; color: #C4973D !important; white-space: nowrap; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
     @media (min-width: 769px) and (max-width: 1280px) { .nav__link { font-size: 11.5px; letter-spacing: 0.04em; } .nav__links { gap: 12px; } }
   </style>
 </head>
@@ -245,8 +246,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><a href="#festivales" class="nav__link">Festivales de magia</a></li>
       <li><a href="empresas.html" class="nav__link">Empresas</a></li>
       <li><a href="ayuntamientos/" class="nav__link">Ayuntamientos</a></li>
-      <li><a href="#contacto" class="nav__link">Contacto</a></li>
-      <li><a href="celebraciones/" class="nav__link evt-nav-pill">¿Tienes un evento familiar?</a></li>
+      <li class="evt-nav-stack"><a href="#contacto" class="nav__link">Contacto</a><a href="celebraciones/" class="evt-nav-pill">¿Tienes un evento familiar?</a></li>
       <li><button class="nav__hamburger" id="menuToggle" aria-label="Menú">
         <span></span><span></span><span></span>
       </button></li>
