@@ -76,7 +76,8 @@ ul  { list-style: none; }
 .nav__links {
   display: flex;
   align-items: center;
-  gap: clamp(18px, 3vw, 42px);
+  flex-wrap: nowrap;
+  gap: clamp(12px, 1.5vw, 34px);
   width: 100%;
   justify-content: flex-end;
 }
@@ -85,7 +86,7 @@ ul  { list-style: none; }
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 300;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--white-dim);
   transition: color 0.25s;
@@ -294,4 +295,10 @@ ul  { list-style: none; }
 }
 @media (max-width: 500px) {
   .cta__form-row { grid-template-columns: 1fr; }
+}
+
+/* Menú de escritorio: que quepa también en iPad horizontal */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .nav__link { font-size: 11.5px; letter-spacing: 0.04em; }
+  .nav__links { gap: 12px; }
 }
