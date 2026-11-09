@@ -243,33 +243,6 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
   .contact{padding:30px 22px;border-radius:26px}.contact h2{font-size:34px}
   .form{padding:22px}.frow{grid-template-columns:1fr}
 }
-@media(max-width:860px){.oh-claim{display:none!important}}
-.oh-h1-m,.oh-sub-m,.oh-cw{display:none}
-@media(max-width:640px){
-.oh-h1-d,.oh-sub-d,.oh-c2{display:none!important}
-.oh-h1-m{display:block}
-.oh-sub-m{display:block}
-.oh-cw{display:inline-flex;order:-1;background:#158038;color:#fff;padding:16px 28px;border-radius:100px;font-size:15.5px;font-weight:600;text-decoration:none;font-family:'DM Sans',sans-serif;align-items:center;justify-content:center;width:100%}
-.oh-c1{background:#fff!important;color:#8a6425!important;box-shadow:inset 0 0 0 1.5px #8a6425}
-}
-.oh-h2-m,.oh-tipos{display:none}
-@media(max-width:640px){
-.oh-h2-d{display:none!important}.oh-h2-m{display:block}
-.oh-img{height:30vw;min-height:150px;max-height:180px}
-.oh-tipos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px}
-.oh-tipos a{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(138,100,37,.25);border-radius:14px;padding:8px 12px;font-size:14.5px;font-weight:500;color:#1A1005;text-decoration:none}
-.oh-sub{margin-bottom:18px}
-.oh-tipos i{font-style:normal;font-size:18px}
-}
-.oh-pm{display:none}.oh-wa-h{display:inline-flex}
-@media(max-width:640px){.oh-pd{display:none}.oh-pm{display:inline}}
-.oh-cont{display:none}
-@media(max-width:640px){.oh-wa-h{display:none!important}.oh-cont{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 14px;background:#fff;color:#8a6425;border-radius:100px;font-size:13px;font-weight:600;text-decoration:none;box-shadow:inset 0 0 0 1.5px #8a6425;white-space:nowrap}.oh-presup{height:38px;padding:0 14px;font-size:13px}}
-.mp-h{margin:0;padding:14px 16px 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8a6425;font-weight:600}.mp-tipos{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:4px 12px 12px;border-bottom:1px solid rgba(44,31,14,.1)}.mp-tipos a{display:block;padding:10px 12px;border:1px solid rgba(138,100,37,.25);border-radius:12px;font-size:14px;color:#1A1005;text-decoration:none;font-weight:500}
-.pv-dd{position:relative;display:inline-block}.pv-ddb{background:none;border:0;font:inherit;color:inherit;cursor:pointer;padding:9px 14px;border-radius:100px}.pv-ddb:hover{background:rgba(138,100,37,.08)}.pv-ddp{display:none;position:absolute;top:100%;left:0;min-width:230px;background:#fff;border:1px solid rgba(44,31,14,.1);border-radius:14px;box-shadow:0 10px 30px rgba(44,31,14,.15);padding:8px;z-index:50}.pv-dd:hover .pv-ddp,.pv-dd:focus-within .pv-ddp{display:block}.pv-ddp a{display:block;padding:9px 12px;border-radius:10px;color:#1A1005;text-decoration:none;font-size:14px}.pv-ddp a:hover{background:#FFF8EE}.pv-tipos{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:0 0 26px;max-width:600px}.pv-tipos a{display:flex;flex-direction:column;align-items:center;gap:4px;background:#fff;border:1px solid rgba(138,100,37,.25);border-radius:12px;padding:10px 4px;font-size:12px;font-weight:500;color:#1A1005;text-decoration:none;text-align:center;line-height:1.2}.pv-tipos i{font-style:normal;font-size:20px}.pv-tipos a{transition:background .2s,border-color .2s,box-shadow .2s}.pv-tipos a:hover{background:#FFF8EE;border-color:#8a6425;box-shadow:0 4px 14px rgba(44,31,14,.12)}
-.pv-tipos{display:none}
-@media(min-width:641px){.pv-tipos{display:grid}}
-@media(min-width:641px){.pv-tipos a{position:relative;overflow:hidden;min-height:96px;justify-content:center;perspective:600px}.pv-f{display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform .45s ease,opacity .3s}.pv-b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:rotateX(-90deg);transition:transform .45s ease,opacity .3s;background:#8a6425;color:#fff!important;border-radius:12px;font-weight:600;padding:8px}.pv-tipos a:hover .pv-f{opacity:0;transform:rotateX(90deg)}.pv-tipos a:hover .pv-b{opacity:1;transform:rotateX(0)}.tile-more{transition:background .25s,padding .25s}.tile:hover .tile-more{display:inline-block;background:#8a6425;color:#fff;padding:9px 16px;border-radius:100px;margin-top:14px}}
 </style>
 </head>
 <body>
@@ -285,30 +258,25 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
 <a href="https://www.masquemagos.com/en/celebraciones/" title="English" style="opacity:0.5;line-height:0;display:inline-block"><svg width="18" height="13" viewBox="0 0 60 30"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L27,13.5 M60,0 L33,13.5 M0,30 L27,16.5 M60,30 L33,16.5" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg></a>
 </span>
   </div>
-  <div class="oh-menu"><div class="pv-dd"><button class="pv-ddb" type="button">Tipo de celebración ▾</button><div class="pv-ddp"><a href="/celebraciones/cumpleanos-infantiles">🎈 Cumple infantil</a><a href="/celebraciones/bautizos">👶 Bautizos</a><a href="/celebraciones/comuniones">✨ Comuniones</a><a href="/celebraciones/bodas">💍 Bodas</a><a href="/celebraciones/cumpleanos-adultos">🥂 Cumple adulto</a><a href="/celebraciones/despedidas">🎉 Despedidas</a></div></div><a href="#precios">Precios</a><a href="#magos">Magos</a><a href="#animadores">Animadores</a><a href="#como">Cómo funciona</a><a href="#opiniones">Opiniones</a></div>
+  <div class="oh-menu"><a href="#precios">Precios</a><a href="#magos">Magos</a><a href="#animadores">Animadores</a><a href="#como">Cómo funciona</a><a href="#opiniones">Opiniones</a></div>
   <div class="oh-right">
-    <a class="oh-wa oh-wa-h" href="https://wa.me/34711531956?text=Hola%21%20Quiero%20reservar%20un%20mago%20para%20mi%20celebraci%C3%B3n.%0A%0ATipo%20de%20celebraci%C3%B3n%3A%20%0AFecha%3A%20%0ALocalidad%3A%20" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp</span></a>
-    <a class="oh-cont" href="#contacto">Contactar</a><a class="oh-presup" href="#precios"><span class="oh-pd">Consultar disponibilidad</span><span class="oh-pm">Ver precios</span></a>
+    <a class="oh-wa" href="https://wa.me/34711531956?text=Hola%21%20Quiero%20reservar%20un%20mago%20para%20mi%20celebraci%C3%B3n.%0A%0ATipo%20de%20celebraci%C3%B3n%3A%20%0AFecha%3A%20%0ALocalidad%3A%20" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp</span></a>
+    <a class="oh-presup" href="#contacto">Consultar disponibilidad</a>
     <button class="oh-ham" onclick="toggleMobileMenu()" aria-label="Menú"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   </div>
 </nav>
-<div id="mobile-menu-panel" class="oh-panel"><p class="mp-h">Tipo de celebración</p><div class="mp-tipos"><a href="/celebraciones/cumpleanos-infantiles">🎈 Cumple infantil</a><a href="/celebraciones/bautizos">👶 Bautizos</a><a href="/celebraciones/comuniones">✨ Comuniones</a><a href="/celebraciones/bodas">💍 Bodas</a><a href="/celebraciones/cumpleanos-adultos">🥂 Cumple adulto</a><a href="/celebraciones/despedidas">🎉 Despedidas</a></div><a href="#magos" onclick="closeMobileMenu()">Magos</a><a href="#animadores" onclick="closeMobileMenu()">Animadores</a><a href="#precios" onclick="closeMobileMenu()">Precios</a><a href="#como" onclick="closeMobileMenu()">Cómo funciona</a><a href="#opiniones" onclick="closeMobileMenu()">Opiniones</a></div>
+<div id="mobile-menu-panel" class="oh-panel"><a href="#precios" onclick="closeMobileMenu()">Precios</a><a href="#magos" onclick="closeMobileMenu()">Magos</a><a href="#animadores" onclick="closeMobileMenu()">Animadores</a><a href="#como" onclick="closeMobileMenu()">Cómo funciona</a><a href="#opiniones" onclick="closeMobileMenu()">Opiniones</a></div>
 
 
 <main>
 <section class="oh-hero">
   <div class="oh-img"><img src="/images/celebraciones/img-12f5c6a8f642.jpg" alt="Mago profesional para celebraciones" width="1400" height="933" fetchpriority="high"/><div class="oh-grad"></div></div>
   <div class="oh-text">
-        <h1 class="oh-h1 oh-h1-d">Magos y animadores para bautizos, comuniones, bodas y cumpleaños</h1>
-        <h1 class="oh-h1 oh-h1-m">Magos y animadores para bautizos, comuniones, bodas y cumpleaños</h1>
-        <p class="oh-h2 oh-h2-m">¿Qué celebráis?</p>
+        <h1 class="oh-h1">Espectáculos de magia y animadores para celebraciones</h1>
+    <p class="oh-h2">La parte de la fiesta que todos recordarán.</p>
     <p class="oh-claim">Tú pones la fecha.<span>Nosotros, la magia.</span></p>
-    <p class="oh-sub oh-sub-d">Magos y animadores en <strong>toda Cataluña y la Comunidad de Madrid</strong>.</p>
-    <p class="oh-h2 oh-h2-d" style="margin-top:-6px">¿Qué celebráis?</p>
-    <div class="pv-tipos"><a href="/celebraciones/cumpleanos-infantiles"><span class="pv-f"><i>🎈</i>Cumple infantil</span><span class="pv-b">Ver qué incluye →</span></a><a href="/celebraciones/bautizos"><span class="pv-f"><i>👶</i>Bautizos</span><span class="pv-b">Ver qué incluye →</span></a><a href="/celebraciones/comuniones"><span class="pv-f"><i>✨</i>Comuniones</span><span class="pv-b">Ver qué incluye →</span></a><a href="/celebraciones/bodas"><span class="pv-f"><i>💍</i>Bodas</span><span class="pv-b">Ver qué incluye →</span></a><a href="/celebraciones/cumpleanos-adultos"><span class="pv-f"><i>🥂</i>Cumple adulto</span><span class="pv-b">Ver qué incluye →</span></a><a href="/celebraciones/despedidas"><span class="pv-f"><i>🎉</i>Despedidas</span><span class="pv-b">Ver qué incluye →</span></a></div>
-    <p class="oh-sub oh-sub-m">Magos y animadores en <strong>toda Cataluña y la Comunidad de Madrid</strong>.</p>
-    <div class="oh-tipos"><a href="/celebraciones/cumpleanos-infantiles"><i>🎈</i>Cumple infantil</a><a href="/celebraciones/bautizos"><i>👶</i>Bautizos</a><a href="/celebraciones/comuniones"><i>✨</i>Comuniones</a><a href="/celebraciones/bodas"><i>💍</i>Bodas</a><a href="/celebraciones/cumpleanos-adultos"><i>🥂</i>Cumple adulto</a><a href="/celebraciones/despedidas"><i>🎉</i>Despedidas</a></div>
-    <div class="oh-ctas"><a href="https://wa.me/34711531956?text=Hola%21%20Quiero%20pedir%20presupuesto%20para%20mi%20celebraci%C3%B3n.%0A%0ATipo%20de%20celebraci%C3%B3n%3A%20%0AFecha%3A%20%0ALocalidad%3A%20" class="oh-cw" target="_blank" rel="noopener">Pedir presupuesto por WhatsApp</a><a href="#precios" class="oh-c1">Ver precios</a><a href="#contacto" class="oh-c2">Consultar disponibilidad</a></div>
+    <p class="oh-sub">Magos y animadores para <strong>bautizos, comuniones, bodas y cumpleaños</strong> en toda Cataluña y la Comunidad de Madrid.</p>
+    <div class="oh-ctas"><a href="#precios" class="oh-c1">Ver precios</a><a href="#contacto" class="oh-c2">Consultar disponibilidad</a></div>
   </div>
 </section>
 
@@ -455,6 +423,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
   </ul>
 </div></footer>
 
+<style>.wa-bub-celeb{display:none}@media (min-width:769px){.wa-bub-celeb{display:flex;position:fixed;right:92px;bottom:34px;z-index:401;align-items:center;gap:10px;background:#fff;color:#1c1c1c;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:15px;padding:12px 10px 12px 20px;border-radius:100px;box-shadow:0 6px 22px rgba(0,0,0,.3);white-space:nowrap}.wa-bub-celeb button{background:none;border:none;color:#9a9a9a;font-size:20px;line-height:1;cursor:pointer;padding:0 6px}}</style><div class="wa-bub-celeb" id="waBubC"><span>¿Hablamos de tu evento?</span><button type="button" aria-label="Cerrar" onclick="document.getElementById('waBubC').style.display='none'">×</button></div>
 <a class="wa-float" href="https://wa.me/34711531956?text=Hola%21%20Quiero%20reservar%20un%20mago%20para%20mi%20celebraci%C3%B3n.%0A%0ATipo%20de%20celebraci%C3%B3n%3A%20%0AFecha%3A%20%0ALocalidad%3A%20" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
 <script>
