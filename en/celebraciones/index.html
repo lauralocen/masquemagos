@@ -121,7 +121,7 @@ h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spac
 .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .tile:hover img{transform:scale(1.04)}
 .tile::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,8,0) 38%,rgba(20,14,8,.82) 100%)}
-.tile-price{position:absolute;top:18px;right:18px;z-index:2;display:flex;align-items:baseline;gap:2px;background:var(--card);color:var(--ink);border-radius:100px;padding:8px 16px 8px 18px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.tile-badge{position:absolute;top:18px;left:18px;z-index:2;background:var(--terra);color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border-radius:100px}.tile-price{position:absolute;top:18px;right:18px;z-index:2;display:flex;align-items:baseline;gap:2px;background:var(--card);color:var(--ink);border-radius:100px;padding:8px 16px 8px 18px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
 .tile-price b{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:24px;line-height:1}
 .tile-price small{font-size:15px;font-weight:700;color:var(--terra)}
 .tile-in{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;display:flex;flex-direction:column}
@@ -298,11 +298,13 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
   </div>
   <div class="tiles">
       <a class="tile reveal" href="/celebraciones/cumpleanos-infantiles">
+        <span class="tile-badge">Best seller</span>
         <img src="/images/celebraciones/mago-cumpleanos-infantil.jpg" alt="Magician for children's birthdays" loading="lazy" style="object-position:center 25%" />
         <span class="tile-price"><b>195</b><small>€</small></span>
         <span class="tile-in"><span class="tile-name">Children's birthday</span><span class="tile-desc">Show de magia. A partir de 5 años.</span><span class="tile-more">See what's included →</span></span>
       </a>
       <a class="tile reveal" href="/celebraciones/cumpleanos-adultos">
+        <span class="tile-badge">Best seller</span>
         <img src="/images/celebraciones/maga-cumpleanos-adultos.jpg" alt="Magician for adult birthdays" loading="lazy" style="object-position:center 25%" />
         <span class="tile-price"><b>225</b><small>€</small></span>
         <span class="tile-in"><span class="tile-name">Adult birthdays</span><span class="tile-desc">Mentalism and close-up magic. Perfect as a surprise.</span><span class="tile-more">See what's included →</span></span>
@@ -318,6 +320,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
         <span class="tile-in"><span class="tile-name">Christenings</span><span class="tile-desc">Close-up magic, table by table, without stopping the meal.</span><span class="tile-more">See what's included →</span></span>
       </a>
       <a class="tile reveal" href="/celebraciones/comuniones">
+        <span class="tile-badge">Best seller</span>
         <img src="/images/celebraciones/mago-comunion.jpg" alt="Magic for communions" loading="lazy" style="object-position:center 80%" />
         <span class="tile-price"><b>295</b><small>€</small></span>
         <span class="tile-in"><span class="tile-name">Communions</span><span class="tile-desc">Magic for the grown-ups and a show for the children.</span><span class="tile-more">See what's included →</span></span>

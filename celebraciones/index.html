@@ -121,7 +121,7 @@ h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spac
 .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .tile:hover img{transform:scale(1.04)}
 .tile::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,8,0) 38%,rgba(20,14,8,.82) 100%)}
-.tile-price{position:absolute;top:18px;right:18px;z-index:2;display:flex;align-items:baseline;gap:2px;background:var(--card);color:var(--ink);border-radius:100px;padding:8px 16px 8px 18px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.tile-badge{position:absolute;top:18px;left:18px;z-index:2;background:var(--terra);color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border-radius:100px}.tile-price{position:absolute;top:18px;right:18px;z-index:2;display:flex;align-items:baseline;gap:2px;background:var(--card);color:var(--ink);border-radius:100px;padding:8px 16px 8px 18px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
 .tile-price b{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:24px;line-height:1}
 .tile-price small{font-size:15px;font-weight:700;color:var(--terra)}
 .tile-in{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;display:flex;flex-direction:column}
@@ -299,11 +299,13 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
   </div>
   <div class="tiles">
       <a class="tile reveal" href="/celebraciones/cumpleanos-infantiles">
+        <span class="tile-badge">Más vendido</span>
         <img src="/images/celebraciones/mago-cumpleanos-infantil.jpg" alt="Mago para cumpleaños infantil" loading="lazy" style="object-position:center 25%" />
         <span class="tile-price"><b>195</b><small>€</small></span>
         <span class="tile-in"><span class="tile-name">Cumpleaños infantil</span><span class="tile-desc">Show de magia. A partir de 5 años.</span><span class="tile-more">Ver qué incluye →</span></span>
       </a>
       <a class="tile reveal" href="/celebraciones/cumpleanos-adultos">
+        <span class="tile-badge">Más vendido</span>
         <img src="/images/celebraciones/maga-cumpleanos-adultos.jpg" alt="Mago para cumpleaños adultos" loading="lazy" style="object-position:center 25%" />
         <span class="tile-price"><b>225</b><small>€</small></span>
         <span class="tile-in"><span class="tile-name">Cumpleaños adultos</span><span class="tile-desc">Mentalismo y magia de cerca. Ideal como sorpresa.</span><span class="tile-more">Ver qué incluye →</span></span>
@@ -319,6 +321,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none}footer a{text
         <span class="tile-in"><span class="tile-name">Bautizos</span><span class="tile-desc">Magia de cerca, mesa a mesa, sin parar la comida.</span><span class="tile-more">Ver qué incluye →</span></span>
       </a>
       <a class="tile reveal" href="/celebraciones/comuniones">
+        <span class="tile-badge">Más vendido</span>
         <img src="/images/celebraciones/mago-comunion.jpg" alt="Mago para comuniones" loading="lazy" style="object-position:center 80%" />
         <span class="tile-price"><b>295</b><small>€</small></span>
         <span class="tile-in"><span class="tile-name">Comuniones</span><span class="tile-desc">Magia para los mayores y show para los niños.</span><span class="tile-more">Ver qué incluye →</span></span>
