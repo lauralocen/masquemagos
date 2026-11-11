@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700">
+<defs><filter id="r"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="7"/></filter>
+<filter id="t"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="2"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .13 0"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs>
+<rect width="600" height="700" fill="#C2502E"/><g filter="url(#r)"><circle cx="300" cy="300" r="210" fill="#D9714F"/>
+<g transform="translate(270 330) rotate(-25)"><rect x="-38" y="-40" width="76" height="200" rx="26" fill="#2E4A3A"/><rect x="-16" y="-110" width="32" height="80" rx="8" fill="#2E4A3A"/><rect x="-18" y="-120" width="36" height="22" fill="#F2B84B"/><rect x="-38" y="40" width="76" height="60" fill="#FFF8EE"/></g>
+<ellipse cx="205" cy="160" rx="22" ry="14" fill="#F2B84B" transform="rotate(-25 205 160)"/>
+<g fill="#FFF8EE"><circle cx="170" cy="120" r="9"/><circle cx="150" cy="170" r="6"/><circle cx="200" cy="100" r="5"/><circle cx="130" cy="130" r="7"/></g>
+<g transform="translate(430 240)"><path d="M-55 30 L-55 -20 L-28 5 L0 -35 L28 5 L55 -20 L55 30 Z" fill="#F2B84B"/><circle cx="0" cy="-38" r="7" fill="#FFF8EE"/></g>
+<g transform="translate(440 430) rotate(15)"><rect x="-38" y="-54" width="76" height="108" rx="8" fill="#FFF8EE"/><g><path d="M0 -8 c-9 -10 -20 4 0 20 c20 -16 9 -30 0 -20z" fill="#C2502E"/></g></g></g><rect width="600" height="700" filter="url(#t)"/></svg>
